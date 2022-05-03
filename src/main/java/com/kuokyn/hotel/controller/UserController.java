@@ -4,7 +4,6 @@ import com.kuokyn.hotel.entity.User;
 import com.kuokyn.hotel.filter.UserFilter;
 import com.kuokyn.hotel.service.SecurityService;
 import com.kuokyn.hotel.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -71,7 +70,7 @@ public class UserController {
     public String addUser(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
         userForm.setPassword(passwordEncoder.encode("testowe"));
         userService.save(userForm);
-        return "welcome.html";
+        return "index.html";
     }
 
     @PostMapping("/registration")
@@ -80,7 +79,7 @@ public class UserController {
 //        emailService.send(userForm.getEmail(), "Witaj w hotelu woods!",
 //                "Rejesracja Twojego konta przebiegła pomyślnie. Twój login to:" + userForm.getLogin() + " Zapraszamy na: www.woods.com");
 
-        return "welcome.html";
+        return "index.html";
     }
 
     @PostMapping("/login")
@@ -90,7 +89,7 @@ public class UserController {
 
         if (logout != null)
             model.addAttribute("message", "You have been logged out successfully.");
-        return "welcome.html";
+        return "index.html";
         //  return "login.html";
     }
 
@@ -99,14 +98,8 @@ public class UserController {
         return "login";
     }
 
-    @GetMapping({"/", "/welcome"})
-    public String welcome(Model model) {
-        return "welcome.html";
-    }
-
-    @GetMapping({"/index"})
+    @GetMapping({"/", "/index"})
     public String index(Model model) {
-
         return "index.html";
     }
 
@@ -119,17 +112,6 @@ public class UserController {
     public String about(Model model) {
 
         return "about.html";
-    }
-
-    @GetMapping({"/spa"})
-    public String spa(Model model) {
-
-        return "spa.html";
-    }
-
-    @GetMapping({"/restaurant"})
-    public String restaurant(Model model) {
-        return "restaurant.html";
     }
 
     @GetMapping({"/userDetails"})

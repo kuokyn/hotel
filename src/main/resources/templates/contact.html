@@ -13,54 +13,7 @@
 
 <body>
 <div th:replace="shared/header :: header('contact')"/>
-<!-- NAVBAR -->
-<!--<div class="container">
-    <nav class="navbar">
-        <a class="logo" href="index.html">La Hotel</a>
-        <input type="checkbox" id="check">
-        <label for="check">
-            <i class="fas fa-bars" id="open"></i>
-            <i class="fas fa-times" id="close"></i>
-        </label>
-        <ul class="nav-list">
-            <li class="nav-item"><a href="rooms.html" class="nav-link">Rooms</a></li>
-            <li class="nav-item"><a href="restaurant.html" class="nav-link">Restaurant</a></li>
-            <li class="nav-item"><a href="spa.html" class="nav-link">Spa</a></li>
-            <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-            <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-            <li class="nav-item"><a href="rooms.html" class="nav-link book-btn">Book</a></li>
-        </ul>
-    </nav>
-</div>-->
 
-<div class="container-fluid text-center">
-    <div class="row content">
-        <div class="col-sm-2 sidenav">
-            <p></p>
-            <div sec:authorize="hasRole('ADMIN')">
-                <a class="btn btn-success" href="/addUser">Dodaj użytkownika</a>
-            </div>
-            <br>
-            <div sec:authorize="hasRole('ADMIN')">
-                <a class="btn btn-success" href="reservationFormADM.html">Dodaj rezerwację</a>
-            </div>
-
-            <div sec:authorize="hasRole('USER')">
-                <a class="btn btn-success" href="reservationFormUSR.html">Zarezerwuj pokój</a>
-
-            </div>
-            <div class="well">
-                <label style="color:darkred; margin-top: 20px;" sec:authorize="isAuthenticated()">
-                    Witaj <span sec:authentication="name"/>!
-                </label>
-            </div>
-            <div class="well">
-                <a sec:authorize="isAuthenticated()" class="btn btn-success" href="accountDetails.html">Twoje konto</a>
-
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- CONTACT SECTION -->
 <section id="contact" class="contact">

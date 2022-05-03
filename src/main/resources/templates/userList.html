@@ -20,36 +20,27 @@
             <form th:method="POST" th:action="@{userList.html}" th:object="${searchCommand}">
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <input th:field="*{phrase}" placeholder="imię/nazwisko/login/email/numer telefonu" class="form-control"
+                        <input th:field="*{phrase}" placeholder="имя/фамилия/логин/почта/номер телефона"
+                               class="form-control"
                                th:classappend="${#fields.hasErrors('phrase')}?'is-invalid'"/>
                         <div class="error text-danger" th:if="${#fields.hasErrors('phrase')}">
                             <p th:each="err : ${#fields.errors('phrase')}" th:text="${err}"></p>
                         </div>
                     </div>
-
-                    <div class="form-group col-md-3">
-
-
-                    </div>
-                    <div class="form-group col-md-3">
-
-                    </div>
-
-
                 </div>
                 <div class="row">
-
                     <div class="form-group col-md-8"></div>
-
                     <div class="form-group col-md-2">
-                        <a th:if="${searchCommand.isEmpty() eq false or #fields.hasErrors('*')}" th:href="@{reservationList.html(all)}" class="btn btn-success">
-                            <span class="glyphicon glyphicon-refresh"></span> Pokaż wszystko
+                        <a th:if="${searchCommand.isEmpty() eq false or #fields.hasErrors('*')}"
+                           th:href="@{reservationList.html(all)}" class="btn btn-success">
+                            <span class="glyphicon glyphicon-refresh"></span>
+                            Показать все
                         </a>
                     </div>
-
                     <div class="form-group col-md-2">
                         <button type="submit" class="btn btn-info">
-                            <span class="glyphicon glyphicon-search"></span> Wyszukaj
+                            <span class="glyphicon glyphicon-search"></span>
+                            Поиск
                         </button>
 
                     </div>
@@ -57,81 +48,55 @@
             </form>
 
             <div th:if="${userListPage.hasContent() eq false}">
-                <span>Brak użytkowników</span>
+                <span>Нет пользователей</span>
             </div>
             <div th:if="${userListPage.hasContent() eq true}">
                   <span th:if="${searchCommand.isEmpty()}">
-                Baza zawiera [[${userListPage.totalElements}]] użytkowników
+                База включает [[${userListPage.totalElements}]] пользователей
             </span>
                 <span th:unless="${searchCommand.isEmpty()}">
-                Wynik wyszukiwania: [[${userListPage.totalElements}]] użytkowników
+                Результат поиска: [[${userListPage.totalElements}]] пользователей
             </span>
             </div>
-
-
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th>Login</th>
-                    <th>Imię i nazwisko</th>
-                    <th>Email</th>
-
-                    <th>Numer telefonu</th>
-                    <th>Opcje</th>
-
-
-
+                    <th>Логин</th>
+                    <th>Имя и фамилия</th>
+                    <th>Почта</th>
+                    <th>Номер телефона</th>
+                    <th>Опции</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="user : ${userListPage.content}">
-
                     <td>
-                       [[${user.login}]]</a>
-
+                        [[${user.login}]]
                     </td>
                     <td>
-
-                            <span > [[${user.firstName}]]</span>
-                            <span > [[${user.lastName}]]</span>
-                        </a>
-
-                    </td>
-
-                    <td>
-                        <span > [[${user.email}]]</span>
+                        <span> [[${user.firstName}]]</span>
+                        <span> [[${user.lastName}]]</span>
                     </td>
                     <td>
-                        <span > [[${user.phoneNumber}]]</span>
+                        <span> [[${user.email}]]</span>
+                    </td>
+                    <td>
+                        <span> [[${user.phoneNumber}]]</span>
                     </td>
                     <td>
                     <td style="align-content: center">
-                        <a class="btn btn-danger" sec:authorize="isAuthenticated()" th:href="@{/userList.html(id=${user.id})}">Usuń</a>
-                        <a class="btn btn-success" th:href="@{/editUser.html(id=${user.id})}">Edytuj</a>
+                        <a class="btn btn-danger" sec:authorize="isAuthenticated()"
+                           th:href="@{/userList.html(id=${user.id})}">Удалить</a>
+                        <a class="btn btn-success" th:href="@{/editUser.html(id=${user.id})}">Редактировать</a>
                     </td>
                     </td>
-
-
-
-
                 </tr>
-
                 </tbody>
             </table>
             <div th:replace="shared/pagination :: pager(userList.html, ${userListPage})"></div>
-
-
-
-
-
         </div>
     </div>
-
 </div>
 </div>
-
-
-
-
 </body>
 </html>

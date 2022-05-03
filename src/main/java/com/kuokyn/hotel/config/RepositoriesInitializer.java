@@ -34,7 +34,6 @@ public class RepositoriesInitializer {
 
         return () -> {
 
-
             if (authorityRepository.findAll().isEmpty()) {
                 try {
                     Authority roleUser = authorityRepository.save(new Authority("ROLE_USER"));
@@ -62,7 +61,6 @@ public class RepositoriesInitializer {
                     admin.setPhoneNumber("7394638459");
                     admin.setAuthorities(new HashSet<>(Arrays.asList(roleAdmin)));
                     admin.setPassword(passwordEncoder.encode("admin"));
-
 
                     userRepository.save(user);
                     userRepository.save(admin);

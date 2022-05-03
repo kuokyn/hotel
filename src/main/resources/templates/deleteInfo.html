@@ -11,33 +11,12 @@
     <link rel="stylesheet" href="/static/css/style.css" th:href="@{/css/style.css}">
 </head>
 <body>
-
 <div class="container-fluid text-center">
-    <div class="row content">
-        <div class="col-sm-2 sidenav">
-
-        </div>
-        <div class="col-sm-8 text-left">
-<h1>
-    Rekord został usunięty.
-    <br>
-    <a class="btn btn-success" href="welcome">Powrót do strony głównej</a>
-
-</h1>
-
-
-
-        </div>
-        <div class="col-sm-2 sidenav">
-
-            </div>
-
-        </div>
-    </div>
+    <h1>
+        Запись удалена
+        <br>
+        <a class="btn btn-success" th:href="@{/index}">Вернуться на главную страницу</a>
+    </h1>
 </div>
-
-
-
-
 </body>
 </html>

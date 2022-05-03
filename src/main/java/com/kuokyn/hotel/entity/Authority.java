@@ -1,7 +1,6 @@
 package com.kuokyn.hotel.entity;
 
 import com.sun.istack.NotNull;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 

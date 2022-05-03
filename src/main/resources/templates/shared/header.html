@@ -6,147 +6,127 @@
 <head>
     <div th:fragment="header-css">
         <link href="welcome">
-        <link href="welcome">
-        <link href="https://fonts.googleapis.com/css?family=Inria+Serif&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rubik+Puddles&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
         <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-        <link type="text/css"  th:href="@{/css/style.css}">
+        <link type="text/css" th:href="@{/css/style.css}">
     </div>
 </head>
 
 <body>
 
 <!-- HEADER -->
-<!--
-<header>
-   <div class="container">
-       <nav class="navbar">
-           <a class="logo" href="index.html">La Hotel</a>
-           <input type="checkbox" id="check">
-           <label for="check">
-               <i class="fas fa-bars" id="open"></i>
-               <i class="fas fa-times" id="close"></i>
-           </label>
-           <ul class="nav-list">
-               <li class="nav-item"><a href="rooms.html" class="nav-link">Rooms</a></li>
-               <li class="nav-item"><a href="restaurant.html" class="nav-link">Restaurant</a></li>
-               <li class="nav-item"><a href="spa.html" class="nav-link">Spa</a></li>
-               <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-               <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-               <li class="nav-item"><a href="rooms.html" class="nav-link book-btn">Book</a></li>
-           </ul>
-       </nav>
-   </div>
-   <div id="hero" class="hero">
-       <div class="container">
-           <div class="hero__text-box">
-               <h1 class="hero__text">
-                   <span class="hero__text-top">Luxury</span>
-                   <span class="hero__text-bottom">Comfort</span>
-               </h1>
-               <button class="btn btn-green">Book a Room</button>
-           </div>
-       </div>
-   </div>
-</header>
--->
-<nav th:fragment="header(pageName)" id="header" class="navbar">
-    <div class="navbar-nav-scroll">
-        <ul class="nav nav-tabs">
+<div class="container">
+    <nav th:fragment="header(pageName)" id="header" class="navbar">
+        <ul class="nav-list">
             <li class="nav-item">
-                <a class="logo" href="/">La Hotel</a></li>
+                <a class="logo" href="/">лого</a></li>
             <li class="nav-item">
                 <a class="nav-link"
+                   sec:authorize="!hasRole('ROLE_ADMIN')"
                    th:classappend="${pageName eq 'welcome'}?'active'"
-                   th:href="@{/}">Главная</a>
-            </li>
-            <li class="nav-item" sec:authorize="isAnonymous()">
-                <a class="nav-link"
-                   th:classappend="${pageName eq 'registration'}?'active'"
-                   th:href="@{/registration}">Зарегистрироваться</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link"
-                   th:classappend="${pageName eq 'about'}?'active'"
-                   th:href="@{/about}">О нас</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link"
-                   th:classappend="${pageName eq 'spa'}?'active'"
-                   th:href="@{/spa}">Спа</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link"
-                   th:classappend="${pageName eq 'restaurant'}?'active'"
-                   th:href="@{/restaurant}">Ресторан</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link"
-                   th:classappend="${pageName eq 'contact'}?'active'"
-                   th:href="@{/contact}">Контакты</a>
-            </li>
-            <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
-                <a class="nav-link"
-                   th:classappend="${pageName eq 'reservationList'}?'active'"
-                   th:href="@{/reservationList.html(all)}">Забронировать</a>
+                   th:href="@{/}">
+                    Главная
+                </a>
             </li>
             <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
                 <a class="nav-link"
                    th:classappend="${pageName eq 'rooms'}?'active'"
-                   th:href="@{/rooms.html}">Номера</a>
+                   th:href="@{/rooms.html}">
+                    Номера
+                </a>
             </li>
             <li class="nav-item" sec:authorize="hasRole('ROLE_USER')">
                 <a class="nav-link"
                    th:classappend="${pageName eq 'yourReservationList'}?'active'"
-                   th:href="@{/yourReservationList.html}">Мои бронирования
+                   th:href="@{/yourReservationList.html}">
+                    Мои бронирования
                 </a>
             </li>
             <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
                 <a class="nav-link"
                    th:classappend="${pageName eq 'userList'}?'active'"
-                   th:href="@{/userList.html(all)}">Пользователи</a>
-            </li>
-            <li class="nav-item">
-                <button th:href="@{/rooms}"
-                        class="btn btn-green">Book a Room</button>
+                   th:href="@{/userList.html(all)}">
+                    Пользователи
+                </a>
             </li>
             <li>
                 <div sec:authorize="hasRole('ADMIN')">
-                        <a class="btn btn-success" href="/addUser">Добавить пользователя</a>
-                    </div>
-            </li>
-            <li>
-                <div sec:authorize="hasRole('ADMIN')">
-                    <a class="btn btn-success" th:href="@{/reservationFormADM.html}">Добавить бронирование</a>
+                    <a class="nav-link" href="/addUser"
+                       th:href="@{/addUser}">
+                        Добавить пользователя
+                    </a>
                 </div>
+            </li>
+            <li>
+                <div sec:authorize="hasRole('ADMIN')">
+                    <a class="nav-link"
+                       th:href="@{/reservationFormADM.html}">
+                        Добавить бронирование
+                    </a>
+                </div>
+            </li>
+            <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                <a class="nav-link"
+                   th:classappend="${pageName eq 'reservationList'}?'active'"
+                   th:href="@{/reservationList.html(all)}">
+                    Брони
+                </a>
             </li>
             <li>
                 <div sec:authorize="hasRole('USER')">
-                    <a class="btn btn-success" th:href="@{/reservationFormUSR.html}">Забронировать номер</a>
+                    <a class="nav-link book-btn" th:href="@{/reservationFormUSR.html}">
+                        Забронировать номер
+                    </a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"
+                   th:classappend="${pageName eq 'about'}?'active'"
+                   th:href="@{/about}">
+                    О нас
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"
+                   th:classappend="${pageName eq 'contact'}?'active'"
+                   th:href="@{/contact}">
+                    Контакты
+                </a>
+            </li>
+            <li class="nav-item" sec:authorize="isAnonymous()">
+                <a class="nav-link"
+                   th:classappend="${pageName eq 'registration'}?'active'"
+                   th:href="@{/registration}">
+                    Зарегистрироваться
+                </a>
+            </li>
+            <li class="nav-item" sec:authorize="isAnonymous()">
+                <a class="nav-link"
+                   th:classappend="${pageName eq 'login'}?'active'" href="/login">
+                    Войти
+                </a>
+            </li>
+            <li class="nav-item" sec:authorize="isAuthenticated()">
+                <a class="nav-link"
+                   th:classappend="${pageName eq 'login'}?'active'" href="/logout">
+                    Выйти
+                </a>
+            </li>
+            <li class="nav-item">
+                <div class="well">
+                    <a sec:authorize="isAuthenticated()"
+                       class="nav-link book-btn"
+                       href="accountDetails.html">
+                        Личный кабинет
+                    </a>
                 </div>
             </li>
         </ul>
-    </div>
-
-    <ul class="nav-tabs navbar-nav ml-md-auto">
-        <li class="nav-item" sec:authorize="isAnonymous()">
-            <a class="nav-link" th:classappend="${pageName eq 'login'}?'active'" href="/login">Войти</a></li>
-        <li class="nav-item" sec:authorize="isAuthenticated()">
-            <a class="nav-link" th:classappend="${pageName eq 'login'}?'active'" href="/logout">Выйти</a></li>
-        <li class="nav-item" >
-                <div class="well">
-                    <label style="color:darkred; margin-top: 20px;" sec:authorize="isAuthenticated()">
-                        Witaj <span sec:authentication="name"/>!
-                    </label>
-                </div>
-        </li>
-        <li class="nav-item" >
-            <div class="well">
-                <a sec:authorize="isAuthenticated()" class="btn btn-success" href="accountDetails.html">Личный кабинет</a>
-            </div>
-        </li>
-    </ul>
-</nav>
+    </nav>
+</div>
 </body>
 </html>
