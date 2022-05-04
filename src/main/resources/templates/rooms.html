@@ -8,6 +8,11 @@
     <title>Rooms - La Hotel</title>
     <div th:replace="shared/header :: header-css"/>
     <link rel="stylesheet" href="/static/css/style.css" th:href="@{/css/style.css}">
+    <style>
+        html {
+            color: var(--white-color);
+        }
+    </style>
 </head>
 
 <body>
@@ -30,7 +35,7 @@
             <div class="row">
                 <div class="col-2">
                     <div class="room-image">
-                        <img src="images/room-1.jpg" alt="room">
+                        <img th:src="@{/img/room-1.jpg}" alt="room">
                     </div>
                     <div class="room-info">
                         <div>
@@ -43,7 +48,7 @@
                 </div>
                 <div class="col-2">
                     <div class="room-image">
-                        <img src="images/room-2.jpg" alt="room">
+                        <img th:src="@{/img/room-2.jpg}" alt="room">
                     </div>
                     <div class="room-info">
                         <div>
@@ -58,7 +63,7 @@
             <div class="row">
                 <div class="col-2">
                     <div class="room-image">
-                        <img src="images/room-3.jpg" alt="room">
+                        <img th:src="@{/img/room-3.jpg}" alt="room">
                     </div>
                     <div class="room-info">
                         <div>
@@ -71,7 +76,7 @@
                 </div>
                 <div class="col-2">
                     <div class="room-image">
-                        <img src="images/room-4.jpg" alt="room">
+                        <img th:src="@{/img/room-4.jpg}" alt="room">
                     </div>
                     <div class="room-info">
                         <div>
@@ -86,7 +91,7 @@
             <div class="row">
                 <div class="col-2">
                     <div class="room-image">
-                        <img src="images/room-5.jpg" alt="room">
+                        <img th:src="@{/img/room-5.jpg}" alt="room">
                     </div>
                     <div class="room-info">
                         <div>
@@ -99,7 +104,7 @@
                 </div>
                 <div class="col-2">
                     <div class="room-image">
-                        <img src="images/room-6.jpg" alt="room">
+                        <img th:src="@{/img/room-6.jpg}" alt="room">
                     </div>
                     <div class="room-info">
                         <div>
@@ -241,5 +246,4 @@
         </div>
     </footer>
 </body>
-
 </html>

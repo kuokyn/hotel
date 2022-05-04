@@ -48,7 +48,6 @@ public class UserController {
     @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/editUser.html", method = RequestMethod.GET)
     public String showFormUSR(Model model, Optional<Long> id) {
-
         model.addAttribute("userForm",
                 id.isPresent() ?
                         userService.getUser(id.get()) :
@@ -124,6 +123,7 @@ public class UserController {
         return "accountDetails.html";
     }
 
+
     @RequestMapping(value = "/reservationList.html", params = {"uid"}, method = RequestMethod.GET)
     public String showUserDetails(Model model, long uid) {
         User u = userService.getUser(uid);
@@ -131,6 +131,7 @@ public class UserController {
 
         return "userDetails";
     }
+
 
     //info about logged in user
     @RequestMapping(value = "/accountDetails.html", method = RequestMethod.GET)
@@ -140,12 +141,14 @@ public class UserController {
         return "accountDetails";
     }
 
+    @Secured("ROLE_ADMIN")
     @GetMapping(value = "/userList.html", params = {"all"})
     public String resetUserList(@ModelAttribute("searchCommand") UserFilter search) {
         search.clear();
         return "redirect:userList.html";
     }
 
+    @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/userList.html", method = {RequestMethod.GET})
     public String showUserList(Model model, Pageable pageable, @Valid @ModelAttribute("searchCommand") UserFilter search) {
 
@@ -154,6 +157,7 @@ public class UserController {
         return "userList";
     }
 
+    @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/userList.html", method = {RequestMethod.POST})
     public String showUserList2(Model model, Pageable pageable, @Valid @ModelAttribute("searchCommand") UserFilter search) {
 
@@ -163,20 +167,19 @@ public class UserController {
         // return "redirect:reservationList";
     }
 
+
     @PostMapping("/changePassword.html")
     public String changePassword(@ModelAttribute("userForm") User userForm, Principal principal) {
-
-
         return "accountDetails.html";
     }
 
     @GetMapping("/changePassword.html")
     public String changePassword(Model model) {
         model.addAttribute("userForm", new User());
-
         return "redirect:/accountDetails.html";
     }
 
+    @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/userList.html", params = "id", method = RequestMethod.GET)
     public String deleteUser(long id, HttpServletRequest request) {
         userService.deleteUser(id);

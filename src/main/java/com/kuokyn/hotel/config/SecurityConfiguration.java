@@ -31,9 +31,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/registration", "/", "/welcome", "/contact", "/spa", "/restaurant", "/about", "/login").permitAll()
-                .anyRequest()
-                .authenticated()
+                .antMatchers("/changePassword.html", "/userDetails.html",
+                        "/reservationList.html", "/userDetails",
+                        "/reservationFormUSR.html")
+                .hasRole("USER")
+                .antMatchers("/addUser", "/changePassword.html",
+                         "/reservationList.html", "/userDetails.html",
+                         "/userDetails", "/editUser.html",
+                        "/userList.html", "/reservationFormADM.html",
+                        "/editReservationFormADM.html", "/deleteInfo.html")
+                .hasRole("ADMIN")
+                .antMatchers("/**").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -43,11 +52,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logout()
 //
 //                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
-//                .invalidateHttpSession(true)
+                .invalidateHttpSession(true)
 //                .clearAuthentication(true)
 //                .deleteCookies("JSESSIONID")
-//                .logoutSuccessUrl("/"); //("/auth/login");
-                .permitAll();
+                .logoutSuccessUrl("/");
+                //.permitAll();
     }
 
 //    @Override

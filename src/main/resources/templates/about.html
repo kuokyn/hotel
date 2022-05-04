@@ -8,6 +8,11 @@
 
     <div th:replace="shared/header :: header-css"/>
     <link rel="stylesheet" href="/static/css/style.css" th:href="@{/css/style.css}">
+    <style>
+        html {
+            color: var(--white-color);
+        }
+    </style>
 </head>
 
 <body>
@@ -29,8 +34,8 @@
                         amet. Reprehenderit ratione doloremque, repudiandae pariatur sed similique.</p>
                 </div>
                 <div class="col-2 image-group">
-                    <img src="images/about-img-1.jpg" alt="image">
-                    <img src="images/about-img-2.jpg" alt="image">
+                    <img th:src="@{/img/about-img-1.jpg}" alt="image">
+                    <img th:src="@{/img/about-img-2.jpg}" alt="image">
                 </div>
             </div>
         </div>
@@ -46,7 +51,7 @@
                     </h2>
                 </div>
                 <div>
-                    <h2>Service</h3>
+                    <h2>Service</h2>
                 </div>
             </div>
         </div>
@@ -103,13 +108,13 @@
         <div class="container">
             <div class="slider">
                 <div class="slider-box">
-                    <img src="images/brands-1.png" alt="brands">
+                    <img th:src="@{/img/brands-1.png}" alt="brands">
                 </div>
                 <div class="slider-box">
-                    <img src="images/brands-2.png" alt="brands">
+                    <img th:src="@{/img/brands-2.png}" alt="brands">
                 </div>
                 <div class="slider-box">
-                    <img src="images/brands-3.png" alt="brands">
+                    <img th:src="@{/img/brands-3.png}" alt="brands">
                 </div>
             </div>
         </div>

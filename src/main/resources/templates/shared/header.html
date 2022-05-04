@@ -9,7 +9,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Rubik+Puddles&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
+<!--        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
         <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
         <link type="text/css" th:href="@{/css/style.css}">
@@ -20,10 +20,14 @@
 
 <!-- HEADER -->
 <div class="container">
-    <nav th:fragment="header(pageName)" id="header" class="navbar">
+    <nav th:fragment="header(pageName)" id="header" class="navbar" style="margin: 0 auto;">
+<!--        <a class="logo" href="/">лого</a>-->
+        <input type="checkbox" id="check">
+        <label for="check">
+            <i class="fas fa-bars" id="open"></i>
+            <i class="fas fa-times" id="close"></i>
+        </label>
         <ul class="nav-list">
-            <li class="nav-item">
-                <a class="logo" href="/">лого</a></li>
             <li class="nav-item">
                 <a class="nav-link"
                    sec:authorize="!hasRole('ROLE_ADMIN')"
@@ -76,15 +80,9 @@
                     Брони
                 </a>
             </li>
-            <li>
-                <div sec:authorize="hasRole('USER')">
-                    <a class="nav-link book-btn" th:href="@{/reservationFormUSR.html}">
-                        Забронировать номер
-                    </a>
-                </div>
-            </li>
             <li class="nav-item">
                 <a class="nav-link"
+                   sec:authorize="!hasRole('ADMIN')"
                    th:classappend="${pageName eq 'about'}?'active'"
                    th:href="@{/about}">
                     О нас
@@ -92,6 +90,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link"
+                   sec:authorize="!hasRole('ADMIN')"
                    th:classappend="${pageName eq 'contact'}?'active'"
                    th:href="@{/contact}">
                     Контакты
@@ -122,6 +121,13 @@
                        class="nav-link book-btn"
                        href="accountDetails.html">
                         Личный кабинет
+                    </a>
+                </div>
+            </li>
+            <li>
+                <div sec:authorize="!hasRole('ADMIN')">
+                    <a class="nav-link book-btn" th:href="@{/reservationFormUSR.html}">
+                        Забронировать номер
                     </a>
                 </div>
             </li>
