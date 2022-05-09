@@ -8,21 +8,71 @@
     <title>Hotel</title>
     <div th:replace="shared/header :: header-css"/>
     <link rel="stylesheet" href="/static/css/style.css" th:href="@{/css/style.css}">
+    <style>
+        .container {
+            font-size: 20px;
+        }
+
+        .h1 {
+            font-size: 50px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            padding: 10px;
+            width: fit-content;
+        }
+
+        .acc-btn {
+            padding: 10px;
+            transition-duration: .7s;
+        }
+
+        .acc-btn:hover {
+            text-decoration: underline;
+            transition-duration: .7s;
+        }
+
+        .data {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+        }
+
+        .data-item {
+            padding: 10px;
+        }
+
+    </style>
 </head>
 <body>
 <div th:replace="shared/header :: header('accountDetails')"/>
-<div class="container-fluid text-center">
-    <div class="row content">
-        <div class="col-sm-8 text-left">
-            <h1>Ваши данные:</h1>
-            Id: <b th:text="${user.id}"></b><br/>
+<div class="container">
+    <h1>Ваши данные</h1>
+    <div class="data">
+        <div class="data-item">
             Логин: <b th:text="${user.login}"></b><br/>
-            Имя: <b th:text="${user.firstName}"></b><br/>
-            Фамилия: <b th:text="${user.lastName}"></b><br/>
-            Почта: <b th:text="${user.email}"></b><br/>
-            Номер телефона: <b th:text="${user.phoneNumber}"></b><br/>
-            <a class="btn btn-success" href="changePassword.html">Изменить пароль</a>
         </div>
+        <div class="data-item">
+            Имя: <b th:text="${user.firstName}"></b><br/>
+        </div>
+        <div class="data-item">
+            Фамилия: <b th:text="${user.lastName}"></b><br/>
+        </div>
+        <div class="data-item">
+            Почта: <b th:text="${user.email}"></b><br/>
+        </div>
+        <div class="data-item">
+            Номер телефона: <b th:text="${user.phoneNumber}"></b><br/>
+        </div>
+    </div>
+    <div class="buttons">
+        <a class="acc-btn"
+           th:classappend="${pageName eq 'login'}?'active'" href="/logout">
+            Выйти
+        </a>
     </div>
 </div>
 </body>

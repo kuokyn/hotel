@@ -7,96 +7,129 @@
     <meta charset="UTF-8">
     <title>Hotel</title>
     <div th:replace="shared/header :: header-css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/style.css" th:href="@{/css/style.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Puddles&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-size: 16px;
+            color: #4a455d;
+        }
+
+        td {
+            text-align: center;
+        }
+
+        .table-names {
+            text-align: center;
+        }
+
+        .form-control{
+            font-size: 1.5rem;
+        }
+        .btn {
+            color: #4a455d;
+        }
+        button.search {
+            height: 32px;
+            width: 70px;
+            outline: none;
+            border: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            justify-content: space-around;
+            color: white;
+            background-color: #5656ff;
+            padding: 10px;
+        }
+
+        button.search:hover {
+            color: #5656ff;
+            background-color: white;
+            transition-duration: .3s;
+        }
+
+    </style>
 </head>
 <body>
 
 <div th:replace="shared/header :: header('userList')"/>
-<div class="container-fluid text-center">
-    <div class="row content">
-
-        <div class="col-sm-8 text-left">
-
-            <form th:method="POST" th:action="@{userList.html}" th:object="${searchCommand}">
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <input th:field="*{phrase}" placeholder="имя/фамилия/логин/почта/номер телефона"
-                               class="form-control"
-                               th:classappend="${#fields.hasErrors('phrase')}?'is-invalid'"/>
-                        <div class="error text-danger" th:if="${#fields.hasErrors('phrase')}">
-                            <p th:each="err : ${#fields.errors('phrase')}" th:text="${err}"></p>
-                        </div>
-                    </div>
+<div class="container text-left">
+    <form th:method="POST" th:action="@{userList.html}" th:object="${searchCommand}">
+        <div class="row">
+            <div class="form-group col-md-6">
+                <input th:field="*{phrase}" placeholder="имя/фамилия/логин/почта/номер телефона"
+                       class="form-control"
+                       th:classappend="${#fields.hasErrors('phrase')}?'is-invalid'"/>
+                <div class="error text-danger" th:if="${#fields.hasErrors('phrase')}">
+                    <p th:each="err : ${#fields.errors('phrase')}" th:text="${err}"></p>
                 </div>
-                <div class="row">
-                    <div class="form-group col-md-8"></div>
-                    <div class="form-group col-md-2">
-                        <a th:if="${searchCommand.isEmpty() eq false or #fields.hasErrors('*')}"
-                           th:href="@{reservationList.html(all)}" class="btn btn-success">
-                            <span class="glyphicon glyphicon-refresh"></span>
-                            Показать все
-                        </a>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <button type="submit" class="btn btn-info">
-                            <span class="glyphicon glyphicon-search"></span>
-                            Поиск
-                        </button>
-
-                    </div>
-                </div>
-            </form>
-
-            <div th:if="${userListPage.hasContent() eq false}">
-                <span>Нет пользователей</span>
             </div>
-            <div th:if="${userListPage.hasContent() eq true}">
+            <div class="form-group col-md-2">
+                <button type="submit" class="search">
+                    Поиск
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-2">
+                <a th:if="${searchCommand.isEmpty() eq false or #fields.hasErrors('*')}"
+                   th:href="@{userList.html}" class="btn btn-success">
+                    Показать все
+                </a>
+            </div>
+        </div>
+    </form>
+
+    <div th:if="${userListPage.hasContent() eq false}">
+        <span>Нет пользователей</span>
+    </div>
+    <div th:if="${userListPage.hasContent() eq true}">
                   <span th:if="${searchCommand.isEmpty()}">
                 База включает [[${userListPage.totalElements}]] пользователей
             </span>
-                <span th:unless="${searchCommand.isEmpty()}">
+        <span th:unless="${searchCommand.isEmpty()}">
                 Результат поиска: [[${userListPage.totalElements}]] пользователей
             </span>
-            </div>
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Логин</th>
-                    <th>Имя и фамилия</th>
-                    <th>Почта</th>
-                    <th>Номер телефона</th>
-                    <th>Опции</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="user : ${userListPage.content}">
-                    <td>
-                        [[${user.login}]]
-                    </td>
-                    <td>
-                        <span> [[${user.firstName}]]</span>
-                        <span> [[${user.lastName}]]</span>
-                    </td>
-                    <td>
-                        <span> [[${user.email}]]</span>
-                    </td>
-                    <td>
-                        <span> [[${user.phoneNumber}]]</span>
-                    </td>
-                    <td>
-                    <td style="align-content: center">
-                        <a class="btn btn-danger" sec:authorize="isAuthenticated()"
-                           th:href="@{/userList.html(id=${user.id})}">Удалить</a>
-                        <a class="btn btn-success" th:href="@{/editUser.html(id=${user.id})}">Редактировать</a>
-                    </td>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <div th:replace="shared/pagination :: pager(userList.html, ${userListPage})"></div>
-        </div>
     </div>
-</div>
+    <table class="table table-striped">
+        <thead>
+        <tr class="table-names">
+            <th>Логин</th>
+            <th>Имя и фамилия</th>
+            <th>Почта</th>
+            <th>Номер телефона</th>
+            <th>Опции</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${userListPage.content}">
+            <td>
+                [[${user.login}]]
+            </td>
+            <td>
+                <span> [[${user.firstName}]]</span>
+                <span> [[${user.lastName}]]</span>
+            </td>
+            <td>
+                <span> [[${user.email}]]</span>
+            </td>
+            <td>
+                <span> [[${user.phoneNumber}]]</span>
+            </td>
+            <td>
+            <td style="align-content: center">
+                <a class="btn btn-danger" sec:authorize="isAuthenticated()"
+                   th:href="@{/userList.html(id=${user.id})}">Удалить</a>
+                <a class="btn btn-success" th:href="@{/editUser.html(id=${user.id})}">Редактировать</a>
+            </td>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="shared/pagination :: pager(userList.html, ${userListPage})"></div>
 </div>
 </body>
 </html>

@@ -1,6 +1,6 @@
 package com.kuokyn.hotel.service;
 
-import com.kuokyn.hotel.controller.commands.RoomReservationFilter;
+import com.kuokyn.hotel.filter.RoomReservationFilter;
 import com.kuokyn.hotel.entity.Room;
 import com.kuokyn.hotel.entity.RoomReservation;
 import com.kuokyn.hotel.entity.RoomType;

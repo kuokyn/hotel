@@ -1,6 +1,6 @@
 package com.kuokyn.hotel.service;
 
-import com.kuokyn.hotel.controller.commands.RoomFilter;
+import com.kuokyn.hotel.filter.RoomFilter;
 import com.kuokyn.hotel.entity.Room;
 import com.kuokyn.hotel.entity.RoomType;
 import org.springframework.data.domain.Page;

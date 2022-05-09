@@ -1,4 +1,4 @@
-package com.kuokyn.hotel.controller.commands;
+package com.kuokyn.hotel.filter;
 
 import org.springframework.util.StringUtils;
 

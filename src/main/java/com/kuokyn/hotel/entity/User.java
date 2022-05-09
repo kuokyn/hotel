@@ -25,7 +25,6 @@ public class User implements Serializable {
     private Long id;
 
     @Column(name = "login", nullable = false)
-    // @UniqueUsername
     private String login;
 
     @Column(name = "email")
@@ -39,7 +38,6 @@ public class User implements Serializable {
     private String lastName;
 
     @Column(name = "password", nullable = false)
-
     private String password;
 
     @Size(min = 0, max = 12)

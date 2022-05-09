@@ -1,4 +1,4 @@
-package com.kuokyn.hotel.controller.commands;
+package com.kuokyn.hotel.filter;
 
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;

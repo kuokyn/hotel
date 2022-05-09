@@ -9,29 +9,28 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
+import java.util.List;
 
 @Repository
 public interface RoomRepository extends JpaRepository<Room, Long> {
 
-/*
-SELECT pub.id, pub.revenue
-    FROM Publisher pub JOIN pub.magazines mag WHERE mag.price > 5.00
- */
     @Query("SELECT distinct v FROM Room v JOIN v.roomReservations rez WHERE " +
             "(" +
-            "v.maxNumberOfPeople >= (:number) AND "+
-            "( :startd NOT BETWEEN rez.reservationStartDate AND rez.reservationEndDate ) AND "+
-            "( :endd NOT BETWEEN rez.reservationStartDate AND rez.reservationEndDate )"+
+            "v.maxNumberOfPeople >= (:number) AND " +
+            "( :startd NOT BETWEEN rez.reservationStartDate AND rez.reservationEndDate ) AND " +
+            "( :endd NOT BETWEEN rez.reservationStartDate AND rez.reservationEndDate )" +
 
-    ")"
-
-
+            ")"
     )
-    Page<Room> findAllRoomsUsingFilter(@Param("number") int p, @Param("startd") Date s, @Param("endd") Date e, Pageable pageable);
+
+    Page<Room> findAllRoomsUsingFilter(@Param("number") int p,
+                                       @Param("startd") Date s,
+                                       @Param("endd") Date e,
+                                       Pageable pageable);
 
     @Query("SELECT distinct v FROM Room v "
 
-  )
+    )
     Page<Room> findAllRooms(Pageable pageable);
 
 }

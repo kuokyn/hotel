@@ -17,14 +17,6 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     @Column(name = "max_number_of_people", nullable = false)
     private int maxNumberOfPeople;
 
@@ -44,7 +36,7 @@ public class Room {
     private int singleBeds;
 
     @Valid
-    @ManyToOne(fetch = FetchType.EAGER) //EAGER powoduje pobranie obiektu roomtype wraz z obiektem room.
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "types_id", nullable = false)
     private RoomType roomType;
 

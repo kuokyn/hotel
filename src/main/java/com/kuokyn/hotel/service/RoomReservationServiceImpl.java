@@ -1,6 +1,6 @@
 package com.kuokyn.hotel.service;
 
-import com.kuokyn.hotel.controller.commands.RoomReservationFilter;
+import com.kuokyn.hotel.filter.RoomReservationFilter;
 import com.kuokyn.hotel.entity.Room;
 import com.kuokyn.hotel.entity.RoomReservation;
 import com.kuokyn.hotel.entity.RoomType;
@@ -41,59 +41,62 @@ public class RoomReservationServiceImpl implements RoomReservationService {
     }
 
     @Override
-    public Page<RoomReservation> getAllRoomReservations(RoomReservationFilter search, Pageable pageable)  {
+    public Page<RoomReservation> getAllRoomReservations(RoomReservationFilter search, Pageable pageable) {
 
         Page page;
-        if(search.isEmpty()){
+        if (search.isEmpty()) {
             page = roomReservationRepository.findAll(pageable);
-        }else{
+        } else {
 
             page = roomReservationRepository.findAllRoomReservationsUsingFilter(search.getPhraseLIKE(), pageable);
         }
-
         return page;
     }
+
     @Override
-    public Page<RoomReservation> getUserRoomReservations(RoomReservationFilter search, Pageable pageable)  {
-
+    public Page<RoomReservation> getUserRoomReservations(RoomReservationFilter search, Pageable pageable) {
         Page page;
-        if(search.isEmpty()){
+        if (search.isEmpty()) {
             page = roomReservationRepository.findAll(pageable);
-        }else{
-
+        } else {
             page = roomReservationRepository.findUserRoomReservations(search.getPhraseLIKE(), pageable);
         }
 
         return page;
     }
+
     @Transactional
     @Override
     public RoomReservation getRoomReservation(Long id) {
-       Optional<RoomReservation> optionalRoomReservation = roomReservationRepository.findById(id);
-        RoomReservation roomReservation = optionalRoomReservation.orElseThrow(()->new RoomReservationNotFoundException(id));
+        Optional<RoomReservation> optionalRoomReservation = roomReservationRepository.findById(id);
+        RoomReservation roomReservation = optionalRoomReservation.orElseThrow(() -> new RoomReservationNotFoundException(id));
         return roomReservation;
-
 
 
     }
 
     @Override
     public void deleteRoomReservation(Long id) {
-        if(roomReservationRepository.existsById(id) == true){
-          roomReservationRepository.deleteById(id);
-        }else{
+        if (roomReservationRepository.existsById(id) == true) {
+            roomReservationRepository.deleteById(id);
+        } else {
             throw new RoomReservationNotFoundException(id);
         }
-
-
 
     }
 
     @Override
     public void saveRoomReservation(RoomReservation roomReservation) {
-            roomReservationRepository.save(roomReservation);
+
+       /* List<RoomReservation> found = roomReservationRepository.findRoomReservationById(roomReservation.getRoom().getId());
+
+        for (RoomReservation roomReservation1 : found) {
+            if (roomReservation.getReservationStartDate().after(roomReservation1.getReservationEndDate())) {
+                roomReservationRepository.save(roomReservation);
+            }
+
+        }*/
+        roomReservationRepository.save(roomReservation);
     }
-
-
 
 }

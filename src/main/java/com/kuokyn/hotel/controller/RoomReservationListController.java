@@ -1,6 +1,6 @@
 package com.kuokyn.hotel.controller;
 
-import com.kuokyn.hotel.controller.commands.RoomReservationFilter;
+import com.kuokyn.hotel.filter.RoomReservationFilter;
 import com.kuokyn.hotel.service.RoomReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -49,7 +49,6 @@ public class RoomReservationListController {
     public String showReservationList2(Model model, Pageable pageable, @Valid @ModelAttribute("searchCommand") RoomReservationFilter search){
         model.addAttribute("roomReservationListPage", roomReservationService.getAllRoomReservations(search, pageable));
         return "reservationList";
-        // return "redirect:reservationList";
     }
 
     @RequestMapping(value="/yourReservationList.html", method = {RequestMethod.GET})
@@ -64,17 +63,21 @@ public class RoomReservationListController {
     public String deleteRoomReservation(long id, HttpServletRequest request){
         roomReservationService.deleteRoomReservation(id);
         String queryString = prepareQueryString(request.getQueryString());
-        //    return String.format("redirect:reservationList.html?%s", queryString);//robimy przekierowanie, ale zachowując parametry pageingu
-        //  return "reservationList.html";
         return "deleteInfo";
     }
 
+    @RequestMapping(value="/yourReservationList.html", params = "id", method = RequestMethod.GET)
+    public String deleteRoomReservationUSR(long id, HttpServletRequest request){
+        roomReservationService.deleteRoomReservation(id);
+        String queryString = prepareQueryString(request.getQueryString());
+        return "deleteInfo";
+    }
     private String prepareQueryString(String queryString) {//np., did=20&page=2&size=20
         return queryString.substring(queryString.indexOf("&")+1);//obcinamy parametr did, bo inaczej znowu będzie wywołana metoda deleteVihicle
     }
 
     @InitBinder
-    public void initBinder(WebDataBinder binder) {//Rejestrujemy edytory właściwości
+    public void initBinder(WebDataBinder binder) {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.setLenient(false);

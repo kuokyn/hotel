@@ -14,7 +14,7 @@
         <ul class="pagination pagination-sm" style="float: left">
             <li class="page-item" th:classappend="${page.first}?'disabled'">
                 <a class="page-link" th:href="${page.first?'#':firstPageUrl}">
-                    <span>Первый</span>
+                    <span>Начало</span>
                 </a>
             </li>
             <li class="page-item" th:classappend="${page.first}?'disabled'">
@@ -34,11 +34,11 @@
             </li>
             <li class="page-item" th:classappend="${page.last}?'disabled'">
                 <a class="page-link" th:href="${page.last?'#':lastPageUrl}">
-                    <span>окончательный</span>
+                    <span>Конец</span>
                 </a>
             </li>
         </ul>
-        <ul class="pagination" style="float: right" th:with="pageSizes = ${ {1, 2, 3, 4, 20} }">
+        <ul class="pagination" style="float: right" th:with="pageSizes = ${ {1, 2, 3, 4, 10} }">
             <li class="page-item" th:each="size : ${pageSizes}" th:classappend="${page.size == size}?'active'"
                 th:with="pageUrl=${mainUrl}+'?page=0&size='+${size}">
                 <a class="page-link" th:href="${pageUrl}">

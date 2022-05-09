@@ -1,6 +1,6 @@
 package com.kuokyn.hotel.service;
 
-import com.kuokyn.hotel.controller.commands.RoomFilter;
+import com.kuokyn.hotel.filter.RoomFilter;
 import com.kuokyn.hotel.entity.Room;
 import com.kuokyn.hotel.entity.RoomType;
 import com.kuokyn.hotel.exception.RoomNotFoundException;
@@ -29,11 +29,11 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public Page<Room> getAllRooms(RoomFilter search, Pageable pageable)  {
+    public Page<Room> getAllRooms(RoomFilter search, Pageable pageable) {
 
         Page page;
 
-            page = roomRepository.findAllRoomsUsingFilter(search.getNumberOfPeople(),search.getReservationStartDate(), search.getReservationEndDate(), pageable);
+        page = roomRepository.findAllRoomsUsingFilter(search.getNumberOfPeople(), search.getReservationStartDate(), search.getReservationEndDate(), pageable);
 
 
         return page;
@@ -44,22 +44,22 @@ public class RoomServiceImpl implements RoomService {
         Page page;
 
         page = roomRepository.findAllRooms(pageable);
-return page;
+        return page;
     }
 
 
     @Override
     public Room getRoom(Long id) {
         Optional<Room> optionalRoom = roomRepository.findById(id);
-        Room room = optionalRoom.orElseThrow(()->new RoomNotFoundException(id));
+        Room room = optionalRoom.orElseThrow(() -> new RoomNotFoundException(id));
         return room;
     }
 
     @Override
     public void deleteRoom(Long id) {
-        if(roomRepository.existsById(id) == true){
+        if (roomRepository.existsById(id) == true) {
             roomRepository.deleteById(id);
-        }else{
+        } else {
             throw new RoomNotFoundException(id);
         }
     }

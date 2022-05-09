@@ -16,15 +16,26 @@ public class RoomType implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    public Long getId() {
-        return id;
-    }
-
     @Column(name="name",nullable = false)
     private String roomTypeName;
+
     @Column(name = "min_price", nullable = false)
     private int minPrice;
+
     @Column(name = "max_price", nullable = false)
     private int maxPrice;
 
+
+    public RoomType() {
+
+    }
+
+    public RoomType(String roomTypeName) {
+        this.roomTypeName = roomTypeName;
+    }
+
+    @Override
+    public String toString() {
+        return "roomTypeName";
+    }
 }

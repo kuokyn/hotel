@@ -2,28 +2,56 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Hotel</title>
     <div th:replace="shared/header :: header-css"/>
     <link rel="stylesheet" href="/static/css/style.css" th:href="@{/css/style.css}">
+    <style>
+        .container {
+            font-size: 20px;
+            color: #4a455d;
+        }
+
+        h1 {
+            font-size: 50px;
+        }
+
+        .data {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+        }
+
+        .data-item {
+            padding: 10px;
+        }
+
+    </style>
 </head>
 <body>
-
-<div class="container-fluid text-center">
-    <div class="row content">
-        <div class="col-sm-8 text-left">
-            <h1>Информация о пользователе</h1>
-            Id: <b th:text="${user.id}"></b><br/>
+<div th:replace="shared/header :: header('userDetails')"/>
+<div class="container">
+    <h1>Информация о пользователе</h1>
+    <div class="data">
+        <div class="data-item">
             Логин: <b th:text="${user.login}"></b><br/>
+        </div>
+        <div class="data-item">
             Имя: <b th:text="${user.firstName}"></b><br/>
+        </div>
+        <div class="data-item">
             Фамилия: <b th:text="${user.lastName}"></b><br/>
+        </div>
+        <div class="data-item">
             Почта: <b th:text="${user.email}"></b><br/>
+        </div>
+        <div class="data-item">
             Номер телефона: <b th:text="${user.phoneNumber}"></b><br/>
-            <a class="btn btn-success" href="/reservationList.html">Назад</a>
         </div>
     </div>
+    <a class="btn btn-success" th:href="@{/reservationList.html}">Назад</a>
 </div>
 </body>
 </html>

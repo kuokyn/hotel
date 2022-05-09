@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant</title>
+    <div th:replace="shared/header :: header-css"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        html {
+            color: var(--white-color);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+
+    <div th:replace="shared/header :: header('restaurant')"/>
+    <!-- MENU SECTION -->
+    <section id="our-menu" class="our-menu">
+        <div class="container">
+            <div class="menu-header">
+                <i class="fas fa-utensils"></i>
+                <h2 class="headline">Меню</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum aspernatur nisi ut, laudantium
+                    veritatis
+                    iste.</p>
+            </div>
+            <div class="menu-table">
+                <div class="row">
+                    <div class="col-2">
+                        <div>
+                            <h3>Завтрак для веганов</h3>
+                            <p>Praesent ut ante vel augue accumsan sagittis aenean. Vivamus non porti aliqu feli.</p>
+                        </div>
+                        <div>
+                            <h3>Сырная тарелка</h3>
+                            <p>Praesent ut ante vel augue accumsan sagittis aenean. Vivamus non porti aliqu feli.</p>
+                        </div>
+                        <div>
+                            <h3>Авокадо тосты</h3>
+                            <p>Praesent ut ante vel augue accumsan sagittis aenean. Vivamus non porti aliqu feli.</p>
+                        </div>
+                        <div>
+                            <h3>Завтрак для веганов</h3>
+                            <p>Praesent ut ante vel augue accumsan sagittis aenean. Vivamus non porti aliqu feli.</p>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div>
+                            <h3>Сырная тарелка</h3>
+                            <p>Praesent ut ante vel augue accumsan sagittis aenean. Vivamus non porti aliqu feli.</p>
+                        </div>
+                        <div>
+                            <h3>Завтрак для веганов</h3>
+                            <p>Praesent ut ante vel augue accumsan sagittis aenean. Vivamus non porti aliqu feli.</p>
+                        </div>
+                        <div>
+                            <h3>Сырная тарелка</h3>
+                            <p>Praesent ut ante vel augue accumsan sagittis aenean. Vivamus non porti aliqu feli.</p>
+                        </div>
+                        <div>
+                            <h3>Авокадо тосты</h3>
+                            <p>Praesent ut ante vel augue accumsan sagittis aenean. Vivamus non porti aliqu feli.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-gallery">
+                <div class="row">
+                    <div class="col-3">
+                        <img th:src="@{img/menu-gallery-1.jpg}" alt="menu-image">
+                    </div>
+                    <div class="col-3">
+                        <img th:src="@{img/menu-gallery-2.jpg}" alt="menu-image">
+                    </div>
+                    <div class="col-3">
+                        <img th:src="@{img/menu-gallery-3.jpg}" alt="menu-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER SECTION -->
+    <footer>
+        <div class="container">
+            <div class="back-to-top">
+                <a href="#hero"><i class="fas fa-chevron-up"></i></a>
+            </div>
+            <div class="footer__content row">
+                <div class="col-3">
+                    <h4>О нас</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam unde accusantium sit repudiandae
+                        incidunt quod eius recusandae blanditiis voluptates consectetur?</p>
+                </div>
+                <div class="col-3">
+                    <h4>Способы оплаты</h4>
+                    <ul class="payment-methods">
+                        <li>
+                            <a href="#">
+                                <i class="fab fa-paypal"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fab fa-cc-visa"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fab fa-cc-mastercard"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fab fa-apple-pay"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-3">
+                    <h4>Наши соц.сети</h4>
+                    <ul class="social-icons">
+                        <li>
+                            <a href="#">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fab fa-tripadvisor"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

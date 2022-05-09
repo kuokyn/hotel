@@ -9,12 +9,28 @@
     <title>Hotel</title>
     <div th:replace="shared/header :: header-css"/>
     <link rel="stylesheet" href="/static/css/style.css" th:href="@{/css/style.css}">
+    <style>
+        .btn {
+            color: #4a455d;
+        }
+
+        .container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 720px;
+        }
+
+        h1 {
+            margin: auto 0;
+        }
+    </style>
 </head>
 <body>
-<div class="container-fluid text-center">
+<div class="container text-center">
     <h1>
         Запись удалена
-        <br>
+        <br><br>
         <a class="btn btn-success" th:href="@{/index}">Вернуться на главную страницу</a>
     </h1>
 </div>

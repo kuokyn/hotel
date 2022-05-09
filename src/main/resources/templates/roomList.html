@@ -7,60 +7,74 @@
     <meta charset="UTF-8">
     <title>Hotel</title>
     <div th:replace="shared/header :: header-css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/style.css" th:href="@{/css/style.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Puddles&display=swap" rel="stylesheet">
+    <style>
+        html {
+            color: var(--white-color);
+        }
+        body {
+            font-size: 16px;
+            color: #4a455d;
+        }
+        td {
+            text-align: center;
+        }
+
+        .table-names {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 <div th:replace="shared/header :: header('roomList')"/>
-<div class="container-fluid text-center">
-    <div class="row content">
-        <div class="col-sm-8 text-left">
-            <div th:if="${roomListPage.hasContent() eq false}">
-                <span>Нет свободных номеров</span>
-            </div>
-            <div th:if="${roomListPage.hasContent() eq true}">
-                Доступно [[${roomListPage.totalElements}]] номеров
-            </div>
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Номер</th>
-                    <th>Пол</th>
-                    <th>Цена за сутки</th>
-                    <th>Стандарт</th>
-                    <th>Максимальное количество людей</th>
-                    <th>Двуспальные кровати</th>
-                    <th>Односпальные кровати</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="room : ${roomListPage.content}">
-                    <td>
-                        [[${room.roomNumber}]]
-                    </td>
-                    <td>
-                        <span> [[${room.floor}]]</span>
-                    </td>
-                    <td>
-                        <span> [[${room.price}]]</span>
-                    </td>
-                    <td>
-                        <span> [[${room.roomType.roomTypeName}]]</span>
-                    </td>
-                    <td>
-                        <span> [[${room.maxNumberOfPeople}]]</span>
-                    </td>
-                    <td>
-                        <span> [[${room.doubleBeds}]]</span>
-                    </td>
-                    <td>
-                        <span> [[${room.singleBeds}]]</span>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <div th:replace="shared/pagination :: pager(roomList.html, ${roomListPage})"></div>
-        </div>
+<div class="container text-left">
+    <div th:if="${roomListPage.hasContent() eq false}">
+        <span>Нет свободных номеров</span>
     </div>
+    <div th:if="${roomListPage.hasContent() eq true}">
+        Доступно [[${roomListPage.totalElements}]] номеров
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr class="table-names">
+            <th>Номер</th>
+            <th>Этаж</th>
+            <th>Цена за сутки</th>
+            <th>Стандарт</th>
+            <th>Максимальное количество людей</th>
+            <th>Двуспальные кровати</th>
+            <th>Односпальные кровати</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="room : ${roomListPage.content}">
+            <td>
+                [[${room.roomNumber}]]
+            </td>
+            <td>
+                <span> [[${room.floor}]]</span>
+            </td>
+            <td>
+                <span> [[${room.price}]]</span>
+            </td>
+            <td>
+                <span> [[${room.roomType.roomTypeName}]]</span>
+            </td>
+            <td>
+                <span> [[${room.maxNumberOfPeople}]]</span>
+            </td>
+            <td>
+                <span> [[${room.doubleBeds}]]</span>
+            </td>
+            <td>
+                <span> [[${room.singleBeds}]]</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="shared/pagination :: pager(roomList.html, ${roomListPage})"></div>
 </div>
 </div>
 </body>

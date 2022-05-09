@@ -1,5 +1,6 @@
 package com.kuokyn.hotel.service;
 
+import com.kuokyn.hotel.controller.UserValidator;
 import com.kuokyn.hotel.entity.Authority;
 import com.kuokyn.hotel.entity.User;
 import com.kuokyn.hotel.exception.UserNotFoundException;
@@ -26,6 +27,8 @@ public class UserService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public void save(User user) {
+        UserValidator userValidator = new UserValidator();
+        //userValidator.validate(user, new Er);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         Authority userRole = authorityRepository.findAuthorityByName("ROLE_USER");
         List roles = Arrays.asList(userRole);

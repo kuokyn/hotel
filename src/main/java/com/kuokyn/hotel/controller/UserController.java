@@ -52,7 +52,6 @@ public class UserController {
                 id.isPresent() ?
                         userService.getUser(id.get()) :
                         new User());
-        System.out.println("login get: " + userService.getUser(id.get()).getLogin());
         return "editUser.html";
     }
 
@@ -75,9 +74,6 @@ public class UserController {
     @PostMapping("/registration")
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
         userService.save(userForm);
-//        emailService.send(userForm.getEmail(), "Witaj w hotelu woods!",
-//                "Rejesracja Twojego konta przebiegła pomyślnie. Twój login to:" + userForm.getLogin() + " Zapraszamy na: www.woods.com");
-
         return "index.html";
     }
 
@@ -89,7 +85,6 @@ public class UserController {
         if (logout != null)
             model.addAttribute("message", "You have been logged out successfully.");
         return "index.html";
-        //  return "login.html";
     }
 
     @GetMapping("/login")
@@ -112,7 +107,16 @@ public class UserController {
 
         return "about.html";
     }
+    @GetMapping({"/spa"})
+    public String spa(Model model) {
 
+        return "spa.html";
+    }
+    @GetMapping({"/restaurant"})
+    public String restaurant(Model model) {
+
+        return "restaurant.html";
+    }
     @GetMapping({"/userDetails"})
     public String showUserDetails(Model model) {
         return "userDetails.html";
@@ -156,7 +160,6 @@ public class UserController {
 
         return "userList";
     }
-
     @Secured("ROLE_ADMIN")
     @RequestMapping(value = "/userList.html", method = {RequestMethod.POST})
     public String showUserList2(Model model, Pageable pageable, @Valid @ModelAttribute("searchCommand") UserFilter search) {

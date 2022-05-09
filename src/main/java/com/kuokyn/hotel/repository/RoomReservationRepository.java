@@ -9,19 +9,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface RoomReservationRepository
-       extends JpaRepository<RoomReservation, Long>, JpaSpecificationExecutor<RoomReservation>
-{
-    //nazwa metody jest jednocześnie zapytaniem
-    //Page<RoomReservation> findByNameContaining(String phrase, Pageable pageable);
-
-    //nad klasą Vehicle znajduje się definicja zapytania (@NamedQuery) powiązana z tą metodą
-  //  Page<RoomReservation> findAllRoomReservationsUsingNamedQuery(String phrase, Pageable pageable);
-
+        extends JpaRepository<RoomReservation, Long>, JpaSpecificationExecutor<RoomReservation> {
     @Query("SELECT v FROM RoomReservation v WHERE " +
             "(" +
-            ":phrase is null OR :phrase = '' OR "+
+            ":phrase is null OR :phrase = '' OR " +
             "upper(v.user.firstName) LIKE upper(:phrase) OR " +
             "upper(v.user.lastName) LIKE upper(:phrase) OR " +
             "upper(v.user.login) LIKE upper(:phrase) )"
@@ -32,11 +27,12 @@ public interface RoomReservationRepository
 
     @Query("SELECT v FROM RoomReservation v WHERE " +
             "(" +
-            ":phrase is null OR :phrase = '' OR "+
+            ":phrase is null OR :phrase = '' OR " +
             "v.user.login LIKE (:phrase) )"
 
     )
     Page<RoomReservation> findUserRoomReservations(@Param("phrase") String p, Pageable pageable);
 
+    List<RoomReservation> findRoomReservationById(Long id);
 
 }

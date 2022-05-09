@@ -1,6 +1,6 @@
 package com.kuokyn.hotel.controller;
 
-import com.kuokyn.hotel.controller.commands.RoomFilter;
+import com.kuokyn.hotel.filter.RoomFilter;
 import com.kuokyn.hotel.entity.Room;
 import com.kuokyn.hotel.entity.RoomReservation;
 import com.kuokyn.hotel.entity.User;
@@ -40,7 +40,6 @@ public class RoomReservationFormController {
     @Autowired
     UserService userService;
 
-    //Wstrzyknięcie zależności przez konstruktor. Od wersji 4.3 Springa nie trzeba używać adnontacji @Autowired, gdy mamy jeden konstruktor
     @Autowired
     public RoomReservationFormController(RoomReservationService roomReservationService) {
         this.roomReservationService = roomReservationService;
@@ -119,14 +118,6 @@ public class RoomReservationFormController {
         search.setReservationStartDate(v.getReservationStartDate());
         search.setReservationEndDate(v.getReservationEndDate());
 
-/*
-Room rr=roomService.getRoom((long) 1);
-RoomReservation rrr=roomReservationService.getRoomReservation((long) 1);
-
-        Set<RoomReservation> roomReservations=rr.getRoomReservations();
-        roomReservations.add(rrr);
-        rr.setRoomReservations(roomReservations);
-*/
 
         model.addAttribute("roomListPage", roomService.getAllRooms(search, pageable));
         model.addAttribute("roomReservation", v);
@@ -144,8 +135,7 @@ RoomReservation rrr=roomReservationService.getRoomReservation((long) 1);
 
     @RequestMapping(value = "/availableRooms.html", method = RequestMethod.POST)
     public String processFormUSR2(@Valid @ModelAttribute("roomReservation") RoomReservation v, @ModelAttribute("roomListPage") Page<Room> r, Principal principal) {
-        v.setPaid(false);
-        v.setVerified(false);
+
         roomReservationService.saveRoomReservation(v);
 
         Long idRoom = v.getRoom().getId();
@@ -165,7 +155,7 @@ RoomReservation rrr=roomReservationService.getRoomReservation((long) 1);
 
 
     @InitBinder
-    public void initBinder(WebDataBinder binder) {//Rejestrujemy edytory właściwości
+    public void initBinder(WebDataBinder binder) {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.setLenient(false);

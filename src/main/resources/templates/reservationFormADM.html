@@ -7,64 +7,87 @@
     <meta charset="UTF-8">
     <title>Hotel</title>
     <div th:replace="shared/header :: header-css"/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/style.css" th:href="@{/css/style.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Puddles&display=swap" rel="stylesheet">
+    <style>
+        .form-control {
+            font-size: 2rem;
+            margin-top: 30px;
+        }
+
+        .btn{
+            color: #4a455d;
+        }
+        body{
+            font-size: 20px;
+        }
+        .next {
+            background-color: #007BFF;
+            color: white;
+        }
+        .container {
+            width: 50%;
+            margin-top: 30px;
+
+        }
+
+    </style>
 </head>
 <body>
 <div th:replace="shared/header :: header('reservationFormADM')"/>
-<div class="container-fluid text-center">
-    <div class="row content">
-        <div class="col-sm-8 text-left">
-            <form th:method="POST" th:object="${roomReservation}" th:action="@{/reservationFormADM.html}">
-                <fieldset>
-                    <div class="form-group">
-                        <label for="user.login" class="bmd-label-floating">Логин пользователя:</label>
-                        <input id="user.login" type="text" th:field="*{user.login}"
-                               class="form-control" th:classappend="${#fields.hasErrors('user.login')}?'is-invalid'"
-                               required="true"/>
-                        <div class="error text-danger" th:if="${#fields.hasErrors('numberOfPeople')}">
-                            <p th:each="err : ${#fields.errors('numberOfPeople')}" th:text="${err}"></p>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="reservationStartDate" class="bmd-label-floating">Начало пребывания:</label>
-                        <input id="reservationStartDate" type="date" th:field="*{reservationStartDate}"
-                               class="form-control"
-                               th:classappend="${#fields.hasErrors('reservationStartDate')}?'is-invalid'"
-                               required="true"/>
-                        <div class="error text-danger" th:if="${#fields.hasErrors('reservationStartDate')}">
-                            <p th:each="err : ${#fields.errors('reservationStartDate')}" th:text="${err}"></p>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="reservationEndDate" class="bmd-label-floating">Конец пребывания:</label>
-                        <input id="reservationEndDate" type="date" th:field="*{reservationEndDate}"
-                               class="form-control"
-                               th:classappend="${#fields.hasErrors('reservationEndDate')}?'is-invalid'"
-                               required="true"/>
-                        <div class="error text-danger" th:if="${#fields.hasErrors('reservationEndDate')}">
-                            <p th:each="err : ${#fields.errors('reservationEndDate')}" th:text="${err}"></p>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="numberOfPeople" class="bmd-label-floating">Количество людей</label>
-                        <input id="numberOfPeople" type="text" th:field="*{numberOfPeople}"
-                               class="form-control" th:classappend="${#fields.hasErrors('numberOfPeople')}?'is-invalid'"
-                               required="true"/>
-                        <div class="error text-danger" th:if="${#fields.hasErrors('numberOfPeople')}">
-                            <p th:each="err : ${#fields.errors('numberOfPeople')}" th:text="${err}"></p>
-                        </div>
-                    </div>
-                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Далее"/>
-                </fieldset>
-            </form>
-            <br>
-            <div sec:authorize="hasRole('ADMIN')">
-                <a class="btn btn-lg btn-block" href="reservationList.html">Отмена</a>
+<div class="container">
+    <form th:method="POST" th:object="${roomReservation}" th:action="@{/reservationFormADM.html}">
+        <fieldset>
+            <div class="form-group">
+                <input id="user.login" type="text" th:field="*{user.login}"
+                       placeholder="Логин"
+                       class="form-control" th:classappend="${#fields.hasErrors('user.login')}?'is-invalid'"
+                       required="true"/>
+                <div class="error text-danger" th:if="${#fields.hasErrors('numberOfPeople')}">
+                    <p th:each="err : ${#fields.errors('numberOfPeople')}" th:text="${err}"></p>
+                </div>
             </div>
-            <div sec:authorize="hasRole('USER')">
-                <a class="btn btn-lg  btn-block" href="yourReservationList.html">Отмена</a>
+            <div class="form-group">
+                <input id="reservationStartDate" type="date" th:field="*{reservationStartDate}"
+                       class="form-control"
+                       th:classappend="${#fields.hasErrors('reservationStartDate')}?'is-invalid'"
+                       required="true"/>
+                <div class="error text-danger" th:if="${#fields.hasErrors('reservationStartDate')}">
+                    <p th:each="err : ${#fields.errors('reservationStartDate')}" th:text="${err}"></p>
+                </div>
             </div>
-        </div>
+            <div class="form-group">
+                <input id="reservationEndDate" type="date" th:field="*{reservationEndDate}"
+                       class="form-control"
+                       th:classappend="${#fields.hasErrors('reservationEndDate')}?'is-invalid'"
+                       required="true"/>
+                <div class="error text-danger" th:if="${#fields.hasErrors('reservationEndDate')}">
+                    <p th:each="err : ${#fields.errors('reservationEndDate')}" th:text="${err}"></p>
+                </div>
+            </div>
+            <div class="form-group">
+                <input id="numberOfPeople" type="text" th:field="*{numberOfPeople}"
+                       placeholder="Количество людей"
+                       class="form-control" th:classappend="${#fields.hasErrors('numberOfPeople')}?'is-invalid'"
+                       required="true"/>
+                <div class="error text-danger" th:if="${#fields.hasErrors('numberOfPeople')}">
+                    <p th:each="err : ${#fields.errors('numberOfPeople')}" th:text="${err}"></p>
+                </div>
+            </div>
+            <div style="text-align: center; color: white;">
+                <input type="submit" class="btn btn-primary next" value="Далее"/>
+            </div>
+
+        </fieldset>
+    </form>
+    <br>
+    <div sec:authorize="hasRole('ADMIN')" style="text-align: center;">
+        <a class="btn btn-danger cancel" href="reservationList.html">Отмена</a>
+    </div>
+    <div sec:authorize="hasRole('USER')" style="text-align: center;">
+        <a class="btn btn-danger cancel" href="yourReservationList.html">Отмена</a>
     </div>
 </div>
 </body>

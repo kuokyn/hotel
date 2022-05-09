@@ -1,8 +1,9 @@
 package com.kuokyn.hotel.config;
 
-import com.kuokyn.hotel.entity.Authority;
-import com.kuokyn.hotel.entity.User;
+import com.kuokyn.hotel.entity.*;
 import com.kuokyn.hotel.repository.AuthorityRepository;
+import com.kuokyn.hotel.repository.RoomRepository;
+import com.kuokyn.hotel.repository.RoomReservationRepository;
 import com.kuokyn.hotel.repository.UserRepository;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Bean;
@@ -10,21 +11,31 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.sql.Date;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Set;
 
 @Configuration
 @EnableJpaRepositories("com.kuokyn.hotel.repository")
 public class RepositoriesInitializer {
 
     private final UserRepository userRepository;
+    private final RoomRepository roomRepository;
 
+    private final RoomReservationRepository roomReservationRepository;
     private final AuthorityRepository authorityRepository;
 
     private final PasswordEncoder passwordEncoder;
 
-    public RepositoriesInitializer(UserRepository userRepository, AuthorityRepository authorityRepository, PasswordEncoder passwordEncoder) {
+    public RepositoriesInitializer(UserRepository userRepository,
+                                   RoomRepository roomRepository,
+                                   RoomReservationRepository roomReservationRepository,
+                                   AuthorityRepository authorityRepository,
+                                   PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.roomRepository = roomRepository;
+        this.roomReservationRepository = roomReservationRepository;
         this.authorityRepository = authorityRepository;
         this.passwordEncoder = passwordEncoder;
     }
@@ -65,6 +76,7 @@ public class RepositoriesInitializer {
                     userRepository.save(user);
                     userRepository.save(admin);
                     userRepository.save(test);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

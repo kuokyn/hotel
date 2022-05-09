@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Hotel - Luxury Hotel Template</title>
+    <title>Crocus</title>
     <div th:replace="shared/header :: header-css"/>
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <style>
@@ -23,8 +24,7 @@
     <div class="container">
         <div class="hero__text-box">
             <h1 class="hero__text">
-                <span class="hero__text-top">Гостиница</span>
-                <span class="hero__text-bottom">Kulalistemaja</span>
+                <span class="hero__text-top">Гостиница «Crocus»</span>
             </h1>
             <a class="btn btn-green" th:href="@{/reservationFormUSR.html}">
                 Забронировать номер
@@ -66,12 +66,12 @@
                 </div>
                 <div class="col-2">
                     <div class="text-box">
-                        <h2 class="headline">Rooms</h2>
+                        <h2 class="headline">Номера</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                             Architecto enim mollitia
                             dolorum
                             necessitatibus vero sunt deleniti minus vel, non quasi?</p>
-                        <button class="btn btn-green">Explore Now</button>
+                        <a class="btn btn-green" th:href="@{/rooms.html}">Узнать больше</a>
                     </div>
                 </div>
             </div>
@@ -84,12 +84,12 @@
             <div class="row column-reverse">
                 <div class="col-2 padding-right">
                     <div class="text-box">
-                        <h2>Restaurant</h2>
+                        <h2>Ресторан</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto
                             enim mollitia
                             dolorum
                             necessitatibus vero sunt deleniti minus vel, non quasi?</p>
-                        <button class="btn btn-white">Dine With Us</button>
+                        <a class="btn btn-white" th:href="@{/restaurant}">Узнать больше</a>
                     </div>
                 </div>
                 <div class="col-2">
@@ -108,12 +108,12 @@
                 </div>
                 <div class="col-2">
                     <div class="text-box">
-                        <h2>Spa &amp; Wellness</h2>
+                        <h2>Спа</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                             Architecto enim mollitia
                             dolorum
                             necessitatibus vero sunt deleniti minus vel, non quasi?</p>
-                        <button class="btn btn-green">Learn More</button>
+                        <a class="btn btn-green" th:href="@{/spa}">Узнать больше</a>
                     </div>
                 </div>
             </div>
@@ -123,7 +123,7 @@
     <!-- TESTIMONIAL SECTION -->
     <section class="testimonials">
         <div class="container">
-            <h2 class="heading-text">Customers Reviews</h2>
+            <h2 class="heading-text">Отзывы</h2>
             <div class="slider">
                 <div class="slider-box">
                     <i class="fas fa-quote-left text-green"></i>
@@ -138,7 +138,7 @@
                         <i class="fas fa-star"></i>
                     </div>
                     <img th:src="@{/img/user-1.jpg}" alt="user">
-                    <h3>Chris Doe</h3>
+                    <h3>Крис Доусон</h3>
                 </div>
                 <div class="slider-box">
                     <i class="fas fa-quote-left text-green"></i>
@@ -153,7 +153,7 @@
                         <i class="fas fa-star"></i>
                     </div>
                     <img th:src="@{/img/user-2.jpg}" alt="user">
-                    <h3>John Doe</h3>
+                    <h3>Джон Конбу</h3>
                 </div>
                 <div class="slider-box">
                     <i class="fas fa-quote-left text-green"></i>
@@ -168,7 +168,7 @@
                         <i class="fas fa-star"></i>
                     </div>
                     <img th:src="@{/img/user-3.jpg}" alt="user">
-                    <h3>Jane Doe</h3>
+                    <h3>Джейн Фостер</h3>
                 </div>
             </div>
         </div>
@@ -183,13 +183,12 @@
         </div>
         <div class="footer__content row">
             <div class="col-3">
-                <h4>About</h4>
+                <h4>О нас</h4>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam unde accusantium sit repudiandae
                     incidunt quod eius recusandae blanditiis voluptates consectetur?</p>
             </div>
             <div class="col-3">
-                <h4>Payment Methods</h4>
-                <p>Pay any way you choose, we support all payment options</p>
+                <h4>Способы оплаты</h4>
                 <ul class="payment-methods">
                     <li>
                         <a href="#">
@@ -214,8 +213,7 @@
                 </ul>
             </div>
             <div class="col-3">
-                <h4>Get Social</h4>
-                <p>Follow us on social media and keep in touch with La Hotel.</p>
+                <h4>Наши соц.сети</h4>
                 <ul class="social-icons">
                     <li>
                         <a href="#">

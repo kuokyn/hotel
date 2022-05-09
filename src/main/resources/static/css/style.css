@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Jost&family=Rubik+Puddles&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
 *,
 *::before,
 *::after {
@@ -21,15 +21,15 @@
 @font-face {
     font-family: "Josefin Sans Light";
     src: url("textfont/JosefinSans-Light.ttf") format("truetype");
-}
+}*/
 
 @font-face {
-    font-family: "SourceSansPro Regular";
-    src: url("textfont/SourceSansPro-Regular.ttf") format("truetype");
+    font-family: "Jost";
+    src: url("../textfont/Jost-Regular.ttf") format("truetype");
 }
-*/
+
 :root {
-    --main-color: #455d58;
+    --main-color: #4a455d;
     --white-pinkish-color : #FAF2F7;
     --white-color: #fff;
 }
@@ -46,6 +46,7 @@ html {
 
 body {
     background-color: var(--white-pinkish-color);
+    font-family: 'Jost', sans-serif;
 }
 
 main img {
@@ -275,7 +276,7 @@ header {
     bottom: 0;
     height: .2rem;
     width: 100%;
-    background-color: rgba(69, 93, 88, 0.65);
+    background-color: rgb(74, 69, 93);
     transform: scaleX(0);
     transform-origin: right;
     transition: transform .4s linear; 
@@ -326,7 +327,7 @@ label #close {
 }
 
 .hero {
-    background-image: linear-gradient(to right bottom, rgba(40, 180, 133, 0.8), rgb(69, 93, 88, 0.5)), url("../img/hero-bg.jpg");
+    background-image: linear-gradient(to right bottom, rgb(135, 127, 164), rgba(73, 69, 93, 0.5)), url("../img/hero-bg.jpg");
     background-size: cover;
     background-position: center;
     height: calc(100vh - 7.5rem);

@@ -31,14 +31,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/changePassword.html", "/userDetails.html",
-                        "/reservationList.html", "/userDetails",
+                .antMatchers("/change*", "/userDetails.html",
+                        "/reservationList.html*", "/userDetails",
                         "/reservationFormUSR.html")
                 .hasRole("USER")
-                .antMatchers("/addUser", "/changePassword.html",
-                         "/reservationList.html", "/userDetails.html",
+                .antMatchers("/addUser", "/change*",
+                         "/reservationList.html*", "/userDetails.html",
                          "/userDetails", "/editUser.html",
-                        "/userList.html", "/reservationFormADM.html",
+                        "/userList.html", "/reservationFormADM.html*",
                         "/editReservationFormADM.html", "/deleteInfo.html")
                 .hasRole("ADMIN")
                 .antMatchers("/**").permitAll()

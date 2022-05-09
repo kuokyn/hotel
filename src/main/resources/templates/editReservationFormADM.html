@@ -8,67 +8,48 @@
     <title>Hotel</title>
     <div th:replace="shared/header :: header-css"/>
     <link rel="stylesheet" href="/static/css/style.css" th:href="@{/css/style.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Puddles&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <div th:replace="shared/header :: header('editReservationFormADM')"/>
-<div class="container-fluid text-center">
-    <div class="row content">
-        <div class="col-sm-8 text-left">
-            <form th:method="POST" th:object="${roomReservation}" th:action="@{/editReservationFormADM.html}">
-                <fieldset>
-                    <p>Бронирование<span style="font-weight: bold;"> [[${roomReservation.user.login}]]</span> / <span > [[${roomReservation.user.firstName}]]</span><span > [[${roomReservation.user.lastName}]]</span></p>
-                    <p>Начало бронирования:  <span style="font-weight: bold;" th:text="${#dates.format(roomReservation.reservationStartDate, 'dd-MM-yyyy')}"></span>
-                        Конец бронирования: <span style="font-weight: bold;" th:text="${#dates.format(roomReservation.reservationEndDate, 'dd-MM-yyyy')}"></span></p>
-                    <p>Номер комнаты : <span style="font-weight: bold;">[[${roomReservation.room.roomNumber}]]</span>
-                        Число людей: <span style="font-weight: bold;" > [[${roomReservation.numberOfPeople}]]</span></p>
-                    <hr>
-                    <div class="form-group">
-                        <label for="checkInDate" class="bmd-label-floating">Начало пребывания:</label>
-                        <input id="checkInDate" type="date" th:field="*{checkInDate}"
-                               class="form-control" th:classappend="${#fields.hasErrors('checkInDate')}?'is-invalid'"
-                               />
-                        <div class="error text-danger" th:if="${#fields.hasErrors('checkInDate')}">
-                            <p th:each="err : ${#fields.errors('checkInDate')}" th:text="${err}"></p>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="checkOutDate" class="bmd-label-floating">Конец пребывания:</label>
-                        <input id="checkOutDate" type="date" th:field="*{checkOutDate}"
-                               class="form-control" th:classappend="${#fields.hasErrors('checkOutDate')}?'is-invalid'"
-                               />
-                        <div class="error text-danger" th:if="${#fields.hasErrors('checkOutDate')}">
-                            <p th:each="err : ${#fields.errors('checkOutDate')}" th:text="${err}"></p>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="endPrice" class="bmd-label-floating">Окончательная цена:</label>
-                        <input id="endPrice" type="text" th:field="*{endPrice}"
-                               class="form-control" th:classappend="${#fields.hasErrors('endPrice')}?'is-invalid'"
-                               />
-                        <div class="error text-danger" th:if="${#fields.hasErrors('endPrice')}">
-                            <p th:each="err : ${#fields.errors('endPrice')}" th:text="${err}"></p>
-                        </div>
-                    </div>
-                        <div class="form-group">
-                            <label class="bmd-label-floating">
-                                <input type="checkbox" th:field="*{paid}"/>
-                                Оплачено?
-                            </label>
-                        </div>
-                    <div class="form-group">
-                        <label class="bmd-label-floating">
-                            <input type="checkbox" th:field="*{verified}"/>
-                            Проверено?
-                        </label>
-                    </div>
-                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Сохрнаить изменения"/>
-                </fieldset>
-            </form>
-            <br>
-                <a class="btn btn-lg btn-block" href="reservationList.html">Отмена</a>
-        </div>
-    </div>
+<div class="container text-center">
+    <!--<form th:method="POST" th:object="${roomReservation}" th:action="@{/editReservationFormADM.html}">
+        <fieldset>
+            <p>Имя: <span style="font-weight: bold;"> [[${roomReservation.user.login}]]
+            </span> /
+                <span> [[${roomReservation.user.firstName}]]</span><span> [[${roomReservation.user.lastName}]]
+                </span>
+            </p>
+            <p>Начало бронирования: <span style="font-weight: bold;"
+                                          th:text="${#dates.format(roomReservation.reservationStartDate, 'dd-MM-yyyy')}"></span><br>
+                Конец бронирования: <span style="font-weight: bold;"
+                                          th:text="${#dates.format(roomReservation.reservationEndDate, 'dd-MM-yyyy')}"></span><br>
+            </p>
+            <p>Номер комнаты : <span style="font-weight: bold;">[[${roomReservation.room.roomNumber}]]</span><br>
+                Число людей: <span style="font-weight: bold;"> [[${roomReservation.numberOfPeople}]]</span></p>
+            <hr>
+            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Сохранить изменения"/>
+        </fieldset>
+    </form>-->
+    <fieldset>
+        <p>Имя: <span style="font-weight: bold;"> [[${roomReservation.user.login}]]
+            </span> /
+            <span> [[${roomReservation.user.firstName}]]</span><span> [[${roomReservation.user.lastName}]]
+                </span>
+        </p>
+        <p>Начало бронирования: <span style="font-weight: bold;"
+                                      th:text="${#dates.format(roomReservation.reservationStartDate, 'dd-MM-yyyy')}"></span><br>
+            Конец бронирования: <span style="font-weight: bold;"
+                                      th:text="${#dates.format(roomReservation.reservationEndDate, 'dd-MM-yyyy')}"></span><br>
+        </p>
+        <p>Номер комнаты : <span style="font-weight: bold;">[[${roomReservation.room.roomNumber}]]</span><br>
+            Число людей: <span style="font-weight: bold;"> [[${roomReservation.numberOfPeople}]]</span></p>
+        <hr>
+    </fieldset>
+    <br>
+
+    <a class="btn btn-lg btn-block" href="reservationList.html">Назад</a>
 </div>
 </body>
 </html>

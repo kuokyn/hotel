@@ -7,104 +7,90 @@
     <meta charset="UTF-8">
     <title>Hotel</title>
     <div th:replace="shared/header :: header-css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/style.css" th:href="@{/css/style.css}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Puddles&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-size: 18px;
+            color: #4a455d;
+        }
+        td {
+            text-align: center;
+        }
+        .table-names {
+            text-align: center;
+        }
+        .btn{
+            color: #4a455d;
+        }
+    </style>
 </head>
 <body>
 
 <div th:replace="shared/header :: header('yourReservationList')"/>
-<div class="container-fluid text-center">
-    <div class="row content">
-        <div class="col-sm-8 text-left">
-            <div th:if="${roomReservationListPage.hasContent() eq false}">
-                <span>Бронирование недоступно</span>
-            </div>
-            <div th:if="${roomReservationListPage.hasContent() eq true}">
-                База включает [[${roomReservationListPage.totalElements}]] бронирований
-            </span>
-            </div>
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>Номер</th>
-                    <th>Опции</th>
-                    <th>Дата въезда</th>
-
-                    <th>Дата выезда</th>
-                    <th>Check-in</th>
-                    <th>Check-out</th>
-                    <th>Число людей</th>
-                    <th>Цена</th>
-                    <th>Вы заплатили?</th>
-                    <th>Это было проверено?</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="roomReservation : ${roomReservationListPage.content}">
-                    <td>
-                        <a th:href="@{/reservationList.html(rid=${roomReservation.room.id})}">
-                            [[${roomReservation.room.roomNumber}]]
-                        </a>
-                    </td>
-                    <td style="align-content: center">
-                        <span th:if="${roomReservation.reservationStartDate.after(#dates.createNow())}">
-                        <a class="btn btn-danger"
-                           sec:authorize="isAuthenticated()"
-                           th:href="@{/reservationList.html(id=${roomReservation.id})}">
-                            Отменить бронирование
-                        </a>
-                        </span>
-                        <span th:if="${roomReservation.reservationStartDate.after(#dates.createNow())}">
-                            <a class="btn btn-success"
-                               th:href="@{/reservationFormUSR.html(id=${roomReservation.id})}">
-                                Изменить бронирование
-                            </a>
-                        </span>
-                        <span th:if="${roomReservation.reservationEndDate.before(#dates.createNow())}">
+<div class="container text-left">
+    <div th:if="${roomReservationListPage.hasContent() eq false}">
+        <span>Бронирований нет</span>
+    </div>
+    <div th:if="${roomReservationListPage.hasContent() eq true}">
+        База включает [[${roomReservationListPage.totalElements}]] бронирований
+        </span>
+    </div>
+    <table class="table table-striped table-hover caption-top">
+        <thead>
+        <tr class="table-names">
+            <th>Номер</th>
+            <th>Дата въезда</th>
+            <th>Дата выезда</th>
+            <th>Число людей</th>
+            <th>Состояние</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="roomReservation : ${roomReservationListPage.content}">
+            <td>
+                <span>
+                    [[${roomReservation.room.roomType.roomTypeName}]]
+                </span>
+            </td>
+            <td>
+                <span th:text="${#dates.format(roomReservation.reservationStartDate, 'dd-MM-yyyy')}"></span>
+            </td>
+            <td>
+                <span th:text="${#dates.format(roomReservation.reservationEndDate, 'dd-MM-yyyy')}"></span>
+            </td>
+            <td>
+                <span> [[${roomReservation.numberOfPeople}]]</span>
+            </td>
+            <td style="align-content: center">
+                <span th:if="${roomReservation.reservationEndDate.before(#dates.createNow())}">
                             Бронирование неактуально
                         </span>
-                        <span th:if="${roomReservation.reservationEndDate.after(#dates.createNow()) and roomReservation.reservationStartDate.before(#dates.createNow())}">
-                            Бронирование продолжается
+                <span th:if="${roomReservation.reservationEndDate.after(#dates.createNow()) and roomReservation.reservationStartDate.before(#dates.createNow())}">
+                            Бронирование актуально
                         </span>
-                    </td>
-                    <td>
-                        <span  th:text="${#dates.format(roomReservation.reservationStartDate, 'dd-MM-yyyy')}"></span>
-                    </td>
-                    <td>
-                        <span th:text="${#dates.format(roomReservation.reservationEndDate, 'dd-MM-yyyy')}"></span>
-                    </td>
-                    <td>
-                        <span th:text="${#dates.format(roomReservation.checkInDate, 'dd-MM-yyyy')}"></span>
-                    </td>
-                    <td>
-                        <span th:text="${#dates.format(roomReservation.checkOutDate, 'dd-MM-yyyy')}"></span>
-                    </td>
-                    <td>
-                        <span > [[${roomReservation.numberOfPeople}]]</span>
-                    </td>
-                    <td>
-                        <span > [[${roomReservation.endPrice}]]</span>
-                    </td>
-                    <td>
-                        <div th:if="${roomReservation.paid eq true}">
-                            <span> Да</span>
-                        </div>
-                        <div th:if="${roomReservation.paid eq false}">
-                            <span> Нет</span>
-                        </div>
-                    </td>
-                    <td>
-                        <div th:if="${roomReservation.verified eq true}">
-                            <span> Да</span>
-                        </div>
-                        <div th:if="${roomReservation.verified eq false}">
-                            <span> Нет</span>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <div th:replace="shared/pagination :: pager(reservationList.html, ${roomReservationListPage})"></div>
-        </div>
+                <span th:if="${roomReservation.reservationStartDate.after(#dates.createNow())}">
+                            <a class="btn btn-success"
+                               th:href="@{/reservationFormUSR.html(id=${roomReservation.id})}">
+                                Изменить
+                            </a>
+                        </span>
+                <br>
+                <span>
+                        <a class="btn btn-danger"
+                           sec:authorize="isAuthenticated()"
+                           th:href="@{/yourReservationList.html(id=${roomReservation.id})}">
+                            Удалить
+                        </a>
+                        </span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="shared/pagination :: pager(reservationList.html, ${roomReservationListPage})">
+
     </div>
 </div>
 </body>
