@@ -36,25 +36,22 @@
     <h1>Информация о номере</h1>
     <div class="data">
         <div class="data-item">
-            Номер: <b th:text="${room.roomNumber}"></b><br/>
+            Номер: <b th:text="${room.id}"></b><br/>
         </div>
         <div class="data-item">
-            Этаж: <b th:text="${room.floor}"></b><br/>
+            Тип: <b th:text="${room.roomType.id}"></b><br/>
         </div>
         <div class="data-item">
-            Тип: <b th:text="${room.roomType.roomTypeName}"></b><br/>
+            Цена за сутки: <b th:text="${room.roomType.price}"></b><br/>
         </div>
         <div class="data-item">
-            Цена за сутки: <b th:text="${room.price}"></b><br/>
+            Односпальные кровати: <b th:text="${room.roomType.single_beds}"></b><br/>
         </div>
         <div class="data-item">
-            Односпальные кровати: <b th:text="${room.singleBeds}"></b><br/>
+            Двуспальные кровати: <b th:text="${room.roomType.double_beds}"></b><br/>
         </div>
         <div class="data-item">
-            Двуспальные кровати: <b th:text="${room.doubleBeds}"></b><br/>
-        </div>
-        <div class="data-item">
-            Максимальное количество людей: <b th:text="${room.maxNumberOfPeople}"></b><br/>
+            Максимальное количество людей: <b th:text="${room.people}"></b><br/>
         </div>
     </div>
     <a class="btn btn-success" th:href="@{/reservationList.html}">Назад</a>

@@ -1,24 +1,26 @@
 package com.kuokyn.hotel.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-
-    @Autowired
-    private UserDetailsService userDetailsService;
+    private final String[] routesForUser = {"/userDetails.html", "/reservationList.html*",
+            "/userDetails", "/reservationFormUSR.html", "/editUserUSR.html*"};
+    private final String[] routesForAdmin = {"/addUser", "/reservationList.html*", "/userDetails.html",
+            "/userDetails", "/editUser.html*", "/userList.html", "/reservationFormADM.html*", "/roomList.html",
+            "/editReservationFormADM.html", "/deleteInfo.html"};
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -31,15 +33,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/change*", "/userDetails.html",
-                        "/reservationList.html*", "/userDetails",
-                        "/reservationFormUSR.html")
+                .antMatchers(routesForUser)
                 .hasRole("USER")
-                .antMatchers("/addUser", "/change*",
-                         "/reservationList.html*", "/userDetails.html",
-                         "/userDetails", "/editUser.html",
-                        "/userList.html", "/reservationFormADM.html*",
-                        "/editReservationFormADM.html", "/deleteInfo.html")
+                .antMatchers(routesForAdmin)
                 .hasRole("ADMIN")
                 .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
@@ -50,31 +46,26 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/")
                 .and()
                 .logout()
-//
-//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
                 .invalidateHttpSession(true)
-//                .clearAuthentication(true)
-//                .deleteCookies("JSESSIONID")
                 .logoutSuccessUrl("/");
-                //.permitAll();
     }
 
-//    @Override
-//    public void configure(WebSecurity web) throws Exception {
-//        web
-//                .ignoring()
-//                .antMatchers("/javax.faces.resource/**", "/**.css", "/**/**.jpeg");
-//    }
-//
     @Bean
     public AuthenticationManager customAuthenticationManager() throws Exception {
         return authenticationManager();
     }
-//
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
-//    }
+
+/*    @Bean
+    public UserDetailsService userDetailsService() {
+        UserDetails user =
+                User.withDefaultPasswordEncoder()
+                        .username("1234567890")
+                        .password("password")
+                        .roles("USER")
+                        .build();
+
+        return new InMemoryUserDetailsManager(user);
+    }*/
 
 
 }

@@ -108,32 +108,32 @@
 </head>
 <body>
 
-<div th:replace="shared/header :: header('editUser')"/>
+<div th:replace="shared/header :: header('editUserUSR')"/>
 <div class="container text-center">
     <section class="task6">
         <div class="form-wrap">
             <div class="h1-form">
                 <h1 class="form">Редактировать данные пользователя</h1>
             </div>
-            <form th:method="POST" th:object="${userForm}">
+            <form th:method="POST" th:object="${editUserForm}">
                 <div>
                     <div class="field">
                         <div class="input-field">
-                            Номер телефона
-                            <span style="font-weight: bold;"> [[${userForm.phone}]]</span>
+                            Логин
+                            <span style="font-weight: bold;"> [[${editUserForm.login}]]</span>
                         </div>
                     </div>
                     <div class="field">
                         <div class="input-field">
                             Имя
-                            <input type="text" th:field="*{name}"
+                            <input type="text" th:field="*{firstName}"
                                    class="form-control" placeholder="" required="true" autofocus="true"/>
                         </div>
                     </div>
                     <div class="field">
                         <div class="input-field">
                             Фамилия
-                            <input type="text" th:field="*{surname}"
+                            <input type="text" th:field="*{lastName}"
                                    class="form-control" placeholder="" required="true" autofocus="true"/>
                         </div>
                     </div>
@@ -144,19 +144,19 @@
                                    class="form-control" placeholder="" required="true" autofocus="true"/>
                         </div>
                     </div>
-                    <!--<div class="field">
+                    <div class="field">
                         <div class="input-field">
                             Телефон
-                            <input type="text" th:field="*{phone}"
+                            <input type="text" th:field="*{phoneNumber}"
                                    class="form-control" placeholder="" required="true" autofocus="true"/>
                         </div>
-                    </div>-->
+                    </div>
                     <input id="submit" type="submit" class="field btn btn-lg btn-primary btn-block"
                            value="Сохранить"/>
                 </div>
             </form>
             <div style="display: flex; justify-content: center">
-                <a class="btn btn-lg btn-block" href="userList.html">Отмена</a>
+                <a class="btn btn-lg btn-block" href="accountDetails.html">Отмена</a>
             </div>
         </div>
     </section>

@@ -165,11 +165,11 @@
                 </div>
             </div>-->
             <form id="form2" class="form-signin" method="POST" th:object="${userForm}">
-                <div class="field email">
+                <div class="field">
                     <div class="input-field">
-                        <label for="username">Логин</label>
-                        <input id="username" type="text" th:field="*{login}"
-                               class="form-control" placeholder="Логин" required="true" autofocus="true"/>
+                        <label for="phoneNumber">Телефон</label>
+                        <input id="phoneNumber" type="text" th:field="*{phone}"
+                               class="form-control" placeholder="Номер телефона" required="true" autofocus="true"/>
                     </div>
                 </div>
                 <div class="field password">
@@ -182,14 +182,14 @@
                 <div class="field">
                     <div class="input-field">
                         <label for="firstname">Имя</label>
-                        <input id="firstname" type="text" th:field="*{firstName}"
+                        <input id="firstname" type="text" th:field="*{name}"
                                class="form-control" placeholder="Имя" required="true" autofocus="true"/>
                     </div>
                 </div>
                 <div class="field">
                     <div class="input-field">
                         <label for="lastName">Фамилия</label>
-                        <input id="lastName" type="text" th:field="*{lastName}"
+                        <input id="lastName" type="text" th:field="*{surname}"
                                class="form-control" placeholder="Фамилия" required="true" autofocus="true"/>
                     </div>
                 </div>
@@ -200,16 +200,9 @@
                                class="form-control" placeholder="example@example.com" required="true" autofocus="true"/>
                     </div>
                 </div>
-                <div class="field">
-                    <div class="input-field">
-                        <label for="phoneNumber">Телефон</label>
-                        <input id="phoneNumber" type="text" th:field="*{phoneNumber}"
-                               class="form-control" placeholder="Номер телефона" required="true" autofocus="true"/>
-                    </div>
-                </div>
                 <input id="login" class="field" type="submit" value="Зарегистрировать">
             </form>
-            <div sec:authorize="!hasRole('ROLE_ADMIN')" class="signup-link">Уже есть аккаунт? <a th:href="@{/login}"> Авторизация</a></div>
+            <div sec:authorize="!hasRole('admin')" class="signup-link">Уже есть аккаунт? <a th:href="@{/login}"> Авторизация</a></div>
         </div>
     </section>
 </div>

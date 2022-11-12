@@ -4,7 +4,6 @@ import com.kuokyn.hotel.entity.Room;
 import com.kuokyn.hotel.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,36 +14,36 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping
 public class RoomController {
 
+    private final RoomService roomService;
+
     @Autowired
-    private RoomService roomService;
+    public RoomController(RoomService roomService) {
+        this.roomService = roomService;
+    }
 
     @GetMapping({"/roomDetails"})
-    public String showRoomDetails(Model model) {
+    public String showRoomDetails() {
         return "roomDetails";
     }
 
-    @RequestMapping(value="/roomDetails.html", params = {"rid"}, method = RequestMethod.GET)
-    public String showRoomDetails(Model model, long rid){
-        Room r = roomService.getRoom(rid);
+    @RequestMapping(value = "/roomDetails.html", params = {"id"}, method = RequestMethod.GET)
+    public String showRoomDetails(Model model, Long id) {
+        Room r = roomService.getRoom(id);
         model.addAttribute("room", r);
         return "roomDetails";
     }
 
-    @RequestMapping(value="/roomList.html", method = {RequestMethod.GET})
-    public String showRoomList(Model model, Pageable pageable){
+    @RequestMapping(value = "/roomList.html", method = {RequestMethod.GET})
+    public String showRoomList(Model model, Pageable pageable) {
         model.addAttribute("roomListPage", roomService.getAllRooms2(pageable));
-        return "roomList.html";
+        return "roomList";
     }
 
 
-    @RequestMapping(value="/rooms.html", method = {RequestMethod.GET})
-    public String showRooms(Model model, Pageable pageable){
+    @RequestMapping(value = "/rooms.html", method = {RequestMethod.GET})
+    public String showRooms(Model model, Pageable pageable) {
         model.addAttribute("roomListPage", roomService.getAllRooms2(pageable));
-        return "rooms.html";
-    }
-
-/*    @GetMapping({"/rooms.html"})
-    public String getRoomPage(Model model) {
         return "rooms";
-    }*/
+    }
+
 }

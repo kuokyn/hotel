@@ -1,8 +1,8 @@
 package com.kuokyn.hotel.service;
 
+import com.kuokyn.hotel.entity.Booking;
 import com.kuokyn.hotel.filter.RoomReservationFilter;
 import com.kuokyn.hotel.entity.Room;
-import com.kuokyn.hotel.entity.RoomReservation;
 import com.kuokyn.hotel.entity.RoomType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,13 +15,13 @@ public interface RoomReservationService {
 
     List<RoomType> getAllRoomTypes();
 
-    Page<RoomReservation> getAllRoomReservations(RoomReservationFilter search, Pageable pageable);
+    Page<Booking> getAllRoomReservations(RoomReservationFilter search, Pageable pageable);
 
-    Page<RoomReservation> getUserRoomReservations(RoomReservationFilter search, Pageable pageable);
+    Page<Booking> getUserRoomReservations(RoomReservationFilter search, Pageable pageable);
 
-    RoomReservation getRoomReservation(Long id);
+    Booking getRoomReservation(Long id);
 
     void deleteRoomReservation(Long id);
 
-    void saveRoomReservation(RoomReservation roomReservation);
+    void saveRoomReservation(Booking booking);
 }

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class UserNotFoundException extends RuntimeException {
 
     public UserNotFoundException() {
-        super(String.format("Пользователь не найден"));
+        super("Пользователь не найден");
     }
 
     public UserNotFoundException(Long id) {

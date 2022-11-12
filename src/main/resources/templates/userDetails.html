@@ -36,19 +36,19 @@
     <h1>Информация о пользователе</h1>
     <div class="data">
         <div class="data-item">
-            Логин: <b th:text="${user.login}"></b><br/>
+            ID: <b th:text="${user.id}"></b><br/>
         </div>
         <div class="data-item">
-            Имя: <b th:text="${user.firstName}"></b><br/>
+            Номер телефона: <b th:text="${user.phone}"></b><br/>
         </div>
         <div class="data-item">
-            Фамилия: <b th:text="${user.lastName}"></b><br/>
+            Имя: <b th:text="${user.name}"></b><br/>
+        </div>
+        <div class="data-item">
+            Фамилия: <b th:text="${user.surname}"></b><br/>
         </div>
         <div class="data-item">
             Почта: <b th:text="${user.email}"></b><br/>
-        </div>
-        <div class="data-item">
-            Номер телефона: <b th:text="${user.phoneNumber}"></b><br/>
         </div>
     </div>
     <a class="btn btn-success" th:href="@{/reservationList.html}">Назад</a>

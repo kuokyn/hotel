@@ -26,7 +26,6 @@ public class RoomReservationFilter {
 
 
     public boolean isEmpty(){
-       // return StringUtils.isEmpty(phrase) && minPrice == null && minPrice == null;
         return StringUtils.isEmpty(phrase) && reservationEndDate == null && reservationStartDate == null;
     }
 
@@ -38,7 +37,7 @@ public class RoomReservationFilter {
 
     public String getPhraseLIKE(){
 
-        if(StringUtils.isEmpty(phrase)) {
+        if(phrase.equals("")) {
             return null;
         }else{
             return "%"+phrase+"%";

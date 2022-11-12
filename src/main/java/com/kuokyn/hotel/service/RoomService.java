@@ -19,5 +19,6 @@ public interface RoomService {
     void saveRoom(Room room);
 
     Page<Room> getAllRooms(RoomFilter search, Pageable pageable);
+
     Page<Room> getAllRooms2(Pageable pageable);
 }

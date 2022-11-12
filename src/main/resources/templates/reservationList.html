@@ -106,47 +106,47 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="roomReservation : ${roomReservationListPage.content}">
+        <tr th:each="booking : ${roomReservationListPage.content}">
             <td>
-                <a th:href="@{/roomDetails.html(rid=${roomReservation.room.id})}">
-                    [[${roomReservation.room.roomNumber}]]
+                <a th:href="@{/roomDetails.html(id=${booking.room.id})}">
+                    [[${booking.room.id}]]
                 </a>
             </td>
             <td>
-                <a th:href="@{/reservationList.html(uid=${roomReservation.user.id})}">
-                    <span> [[${roomReservation.user.firstName}]]</span>
-                    <span> [[${roomReservation.user.lastName}]]</span>
+                <a th:href="@{/reservationList.html(phone=${booking.user.phone})}">
+                    <span> [[${booking.user.name}]]</span>
+                    <span> [[${booking.user.surname}]]</span>
                 </a>
             </td>
             <td>
-                <span th:text="${#dates.format(roomReservation.reservationStartDate, 'dd-MM-yyyy')}"></span>
+                <span th:text="${#dates.format(booking.reservationStartDate, 'dd-MM-yyyy')}"></span>
             </td>
             <td>
-                <span th:text="${#dates.format(roomReservation.reservationEndDate, 'dd-MM-yyyy')}"></span>
+                <span th:text="${#dates.format(booking.reservationEndDate, 'dd-MM-yyyy')}"></span>
             </td>
             <td>
-                <span> [[${roomReservation.numberOfPeople}]]</span>
+                <span> [[${booking.numberOfPeople}]]</span>
             </td>
 
             <td>
-                <span th:if="${roomReservation.reservationStartDate.after(#dates.createNow())}">
+                <span th:if="${booking.reservationStartDate.after(#dates.createNow())}">
                             <a class="btn btn-success"
-                               th:href="@{/reservationFormADM.html(id=${roomReservation.id})}">
+                               th:href="@{/reservationFormADM.html(id=${booking.id})}">
                                 Изменить
                             </a>
                         </span>
-                <span th:if="${roomReservation.reservationStartDate.after(#dates.createNow())}">
+                <span th:if="${booking.reservationStartDate.after(#dates.createNow())}">
                         <a class="btn btn-danger" sec:authorize="isAuthenticated()"
-                           th:href="@{/reservationList.html(id=${roomReservation.id})}">
+                           th:href="@{/reservationList.html(id=${booking.id})}">
                             Отменить
                         </a>
                        </span>
-                <span th:if="${roomReservation.reservationEndDate.before(#dates.createNow())}">
+                <span th:if="${booking.reservationEndDate.before(#dates.createNow())}">
                         <p>Бронирование неактуально</p>
                         <a class="btn btn-danger" sec:authorize="isAuthenticated()"
-                           th:href="@{/reservationList.html(id=${roomReservation.id})}">Удалить</a>
+                           th:href="@{/reservationList.html(id=${booking.id})}">Удалить</a>
                        </span>
-                <span th:if="${roomReservation.reservationEndDate.after(#dates.createNow()) and roomReservation.reservationStartDate.before(#dates.createNow())}">
+                <span th:if="${booking.reservationEndDate.after(#dates.createNow()) and booking.reservationStartDate.before(#dates.createNow())}">
                             <p>Бронирование актуально</p>
                         </span>
             </td>

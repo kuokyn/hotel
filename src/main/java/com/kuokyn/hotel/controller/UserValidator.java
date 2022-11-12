@@ -1,11 +1,15 @@
 package com.kuokyn.hotel.controller;
+
 import com.kuokyn.hotel.entity.User;
 import com.kuokyn.hotel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
+
+import javax.validation.constraints.NotNull;
 
 @Component
 public class UserValidator implements Validator {
@@ -13,7 +17,7 @@ public class UserValidator implements Validator {
     private UserService userService;
 
     @Override
-    public boolean supports(Class<?> aClass) {
+    public boolean supports(@NotNull Class<?> aClass) {
         return User.class.equals(aClass);
     }
 
@@ -21,10 +25,10 @@ public class UserValidator implements Validator {
     public void validate(Object o, Errors errors) {
         User user = (User) o;
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "NotEmpty");
-        if (user.getLogin().length() < 6 || user.getLogin().length() > 32) {
+        if (user.getPhone().length() > 12) {
             errors.rejectValue("username", "Size.userForm.username");
         }
-        if (userService.getUserByLogin(user.getLogin()) != null) {
+        if (userService.getUserByPhone(user.getPhone()) != null) {
             errors.rejectValue("username", "Duplicate.userForm.username");
         }
 

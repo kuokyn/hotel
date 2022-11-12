@@ -2,12 +2,12 @@ package com.kuokyn.hotel.filter;
 
 import org.springframework.util.StringUtils;
 
-public class UserFilter {
+public class WorkerFilter {
 
     private String phrase;
 
     public boolean isEmpty() {
-         return StringUtils.isEmpty(phrase);
+        return StringUtils.isEmpty(phrase);
     }
 
     public void clear() {

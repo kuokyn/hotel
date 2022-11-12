@@ -11,8 +11,8 @@ public class RoomFilter {
     @Positive
     private int numberOfPeople;
 
-    private Date reservationStartDate;
-    private Date reservationEndDate;
+    private String reservationStartDate;
+    private String reservationEndDate;
 
 
     @PositiveOrZero
@@ -44,19 +44,19 @@ public class RoomFilter {
         this.numberOfPeople = numberOfPeople;
     }
 
-    public Date getReservationStartDate() {
+    public String getReservationStartDate() {
         return reservationStartDate;
     }
 
-    public void setReservationStartDate(Date reservationStartDate) {
+    public void setReservationStartDate(String reservationStartDate) {
         this.reservationStartDate = reservationStartDate;
     }
 
-    public Date getReservationEndDate() {
+    public String getReservationEndDate() {
         return reservationEndDate;
     }
 
-    public void setReservationEndDate(Date reservationEndDate) {
+    public void setReservationEndDate(String reservationEndDate) {
         this.reservationEndDate = reservationEndDate;
     }
 }

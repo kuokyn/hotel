@@ -8,15 +8,16 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
 @Repository
 public interface RoomRepository extends JpaRepository<Room, Long> {
 
-    @Query("SELECT distinct v FROM Room v JOIN v.roomReservations rez WHERE " +
+    @Query("SELECT distinct v FROM Room v JOIN v.bookings rez WHERE " +
             "(" +
-            "v.maxNumberOfPeople >= (:number) AND " +
+            "v.people >= (:number) AND " +
             "( :startd NOT BETWEEN rez.reservationStartDate AND rez.reservationEndDate ) AND " +
             "( :endd NOT BETWEEN rez.reservationStartDate AND rez.reservationEndDate )" +
 

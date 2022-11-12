@@ -40,9 +40,8 @@
         <thead>
         <tr class="table-names">
             <th>Номер</th>
-            <th>Этаж</th>
             <th>Цена за сутки</th>
-            <th>Стандарт</th>
+            <th>Тип комнаты</th>
             <th>Максимальное количество людей</th>
             <th>Двуспальные кровати</th>
             <th>Односпальные кровати</th>
@@ -51,25 +50,22 @@
         <tbody>
         <tr th:each="room : ${roomListPage.content}">
             <td>
-                [[${room.roomNumber}]]
+                [[${room.id}]]
             </td>
             <td>
-                <span> [[${room.floor}]]</span>
+                <span> [[${room.roomType.price}]]</span>
             </td>
             <td>
-                <span> [[${room.price}]]</span>
+                <span> [[${room.roomType.id}]]</span>
             </td>
             <td>
-                <span> [[${room.roomType.roomTypeName}]]</span>
+                <span> [[${room.people}]]</span>
             </td>
             <td>
-                <span> [[${room.maxNumberOfPeople}]]</span>
+                <span> [[${room.roomType.double_beds}]]</span>
             </td>
             <td>
-                <span> [[${room.doubleBeds}]]</span>
-            </td>
-            <td>
-                <span> [[${room.singleBeds}]]</span>
+                <span> [[${room.roomType.single_beds}]]</span>
             </td>
         </tr>
         </tbody>

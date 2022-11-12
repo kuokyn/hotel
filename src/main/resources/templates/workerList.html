@@ -55,12 +55,12 @@
 </head>
 <body>
 
-<div th:replace="shared/header :: header('userList')"/>
+<div th:replace="shared/header :: header('workerList')"/>
 <div class="container text-left">
-    <form th:method="POST" th:action="@{userList.html}" th:object="${searchCommand}">
+    <form th:method="POST" th:action="@{workerList.html}" th:object="${searchCommand}">
         <div class="row">
             <div class="form-group col-md-6">
-                <input th:field="*{phrase}" placeholder="имя/фамилия/логин/почта/номер телефона"
+                <input th:field="*{phrase}" placeholder="имя/фамилия/почта/номер телефона"
                        class="form-control"
                        th:classappend="${#fields.hasErrors('phrase')}?'is-invalid'"/>
                 <div class="error text-danger" th:if="${#fields.hasErrors('phrase')}">
@@ -76,22 +76,22 @@
         <div class="row">
             <div class="form-group col-md-2">
                 <a th:if="${searchCommand.isEmpty() eq false or #fields.hasErrors('*')}"
-                   th:href="@{userList.html}" class="btn btn-success">
+                   th:href="@{workerList.html}" class="btn btn-success">
                     Показать все
                 </a>
             </div>
         </div>
     </form>
 
-    <div th:if="${userListPage.hasContent() eq false}">
-        <span>Нет пользователей</span>
+    <div th:if="${workerListPage.hasContent() eq false}">
+        <span>Нет записей</span>
     </div>
-    <div th:if="${userListPage.hasContent() eq true}">
+    <div th:if="${workerListPage.hasContent() eq true}">
                   <span th:if="${searchCommand.isEmpty()}">
-                База включает [[${userListPage.totalElements}]] пользователей
+                База включает [[${workerListPage.totalElements}]] работников
             </span>
         <span th:unless="${searchCommand.isEmpty()}">
-                Результат поиска: [[${userListPage.totalElements}]] пользователей
+                Результат поиска: [[${workerListPage.totalElements}]]  работников
             </span>
     </div>
     <table class="table table-striped">
@@ -100,31 +100,39 @@
             <th>Номер телефона</th>
             <th>Имя и фамилия</th>
             <th>E-mail</th>
+            <th>Должность</th>
+            <th>Обязанности</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="user : ${userListPage.content}">
+        <tr th:each="worker : ${workerListPage.content}">
             <td>
-                [[${user.phone}]]
+                [[${worker.phone}]]
             </td>
             <td>
-                <span> [[${user.name}]]</span>
-                <span> [[${user.surname}]]</span>
+                <span> [[${worker.name}]]</span>
+                <span> [[${worker.surname}]]</span>
             </td>
             <td>
-                <span> [[${user.email}]]</span>
+                <span> [[${worker.email}]]</span>
+            </td>
+            <td>
+                <span> [[${worker.job}]]</span>
+            </td>
+            <td>
+                <span> [[${worker.job.description}]]</span>
             </td>
             <td>
             <td style="align-content: center">
                 <a class="btn btn-danger" sec:authorize="isAuthenticated()"
-                   th:href="@{/userList.html(id=${user.id})}">Удалить</a>
-                <a class="btn btn-success" th:href="@{/editUser.html(id=${user.id})}">Редактировать</a>
+                   th:href="@{/workerList.html(id=${worker.id})}">Удалить</a>
+                <a class="btn btn-success" th:href="@{/editWorker.html(id=${worker.id})}">Редактировать</a>
             </td>
             </td>
         </tr>
         </tbody>
     </table>
-    <div th:replace="shared/pagination :: pager(userList.html, ${userListPage})"></div>
+    <div th:replace="shared/pagination :: pager(workerList.html, ${workerListPage})"></div>
 </div>
 </body>
 </html>

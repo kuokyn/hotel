@@ -18,22 +18,27 @@ import java.util.Set;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
+    private final UserRepository userRepository;
+
     @Autowired
-    private UserRepository userRepository;
+    public UserDetailsServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     @Transactional(readOnly = true)
-    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        User user = userRepository.findByLogin(login);
+    public UserDetails loadUserByUsername(String phone) throws UsernameNotFoundException {
+        User user = userRepository.findByPhone(phone);
         if (user == null) {
-            throw new UsernameNotFoundException(login);
+            throw new UsernameNotFoundException(phone);
         }
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        for (Authority authority : user.getAuthorities()) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(authority.getName()));
+        for (GrantedAuthority authority : user.getAuthorities()) {
+            grantedAuthorities.add(new SimpleGrantedAuthority(authority.getAuthority()));
         }
-        return new org.springframework.security.core.userdetails.User(user.getLogin(),user.getPassword(),grantedAuthorities);
+
+        return new org.springframework.security.core.userdetails.User(user.getPhone(),user.getPassword(),grantedAuthorities);
     }
 
 

@@ -33,13 +33,12 @@
         Доступные номера: [[${roomListPage.totalElements}]]
         </span>
     </div>
-    <form th:method="POST" th2:object="${roomReservation}" th2:action="@{/availableRooms.html}">
+    <form th:method="POST" th2:object="${booking}" th2:action="@{/availableRooms.html}">
         <fieldset>
             <table class="table table-striped">
                 <thead>
                 <tr>
                     <th></th>
-                    <th>Этаж</th>
                     <th>Тип</th>
                     <th>Двуспальные кровати</th>
                     <th>Односпальные кровати</th>
@@ -51,20 +50,17 @@
                     <td>
                         <input type="radio" name="room" th:value="${room.id}" th2:field="*{room.id}"/>
                     </td>
-                    <td>
-                        <span> [[${room.floor}]]</span>
-                    </td>
                     <td style="align-content: center">
-                        <span> [[${room.roomType.roomTypeName}]]</span>
+                        <span> [[${room.roomType.id}]]</span>
                     </td>
                     <td>
-                        <span> [[${room.doubleBeds}]]</span>
+                        <span> [[${room.roomType.double_beds}]]</span>
                     </td>
                     <td>
-                        <span> [[${room.singleBeds}]]</span>
+                        <span> [[${room.roomType.single_beds}]]</span>
                     </td>
                     <td>
-                        <span> [[${room.price}]]</span>
+                        <span> [[${room.roomType.price}]]</span>
                     </td>
                 </tr>
                 </tbody>

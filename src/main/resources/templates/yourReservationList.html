@@ -49,31 +49,31 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="roomReservation : ${roomReservationListPage.content}">
+        <tr th:each="booking : ${roomReservationListPage.content}">
             <td>
                 <span>
-                    [[${roomReservation.room.roomType.roomTypeName}]]
+                    [[${booking.room.roomType.id}]]
                 </span>
             </td>
             <td>
-                <span th:text="${#dates.format(roomReservation.reservationStartDate, 'dd-MM-yyyy')}"></span>
+                <span th:text="${#dates.format(booking.reservationStartDate, 'dd-MM-yyyy')}"></span>
             </td>
             <td>
-                <span th:text="${#dates.format(roomReservation.reservationEndDate, 'dd-MM-yyyy')}"></span>
+                <span th:text="${#dates.format(booking.reservationEndDate, 'dd-MM-yyyy')}"></span>
             </td>
             <td>
-                <span> [[${roomReservation.numberOfPeople}]]</span>
+                <span> [[${booking.numberOfPeople}]]</span>
             </td>
             <td style="align-content: center">
-                <span th:if="${roomReservation.reservationEndDate.before(#dates.createNow())}">
+                <span th:if="${booking.reservationEndDate.before(#dates.createNow())}">
                             Бронирование неактуально
                         </span>
-                <span th:if="${roomReservation.reservationEndDate.after(#dates.createNow()) and roomReservation.reservationStartDate.before(#dates.createNow())}">
+                <span th:if="${booking.reservationEndDate.after(#dates.createNow()) and booking.reservationStartDate.before(#dates.createNow())}">
                             Бронирование актуально
                         </span>
-                <span th:if="${roomReservation.reservationStartDate.after(#dates.createNow())}">
+                <span th:if="${booking.reservationStartDate.after(#dates.createNow())}">
                             <a class="btn btn-success"
-                               th:href="@{/reservationFormUSR.html(id=${roomReservation.id})}">
+                               th:href="@{/reservationFormUSR.html(id=${booking.id})}">
                                 Изменить
                             </a>
                         </span>
@@ -81,7 +81,7 @@
                 <span>
                         <a class="btn btn-danger"
                            sec:authorize="isAuthenticated()"
-                           th:href="@{/yourReservationList.html(id=${roomReservation.id})}">
+                           th:href="@{/yourReservationList.html(id=${booking.id})}">
                             Удалить
                         </a>
                         </span>

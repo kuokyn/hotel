@@ -66,7 +66,7 @@
                 </a>
             </li>
             <li>
-                <div sec:authorize="hasRole('ADMIN')">
+                <div sec:authorize="hasRole('ROLE_ADMIN')">
                     <a class="nav-link"
                        th:href="@{/registration}">
                         Добавить пользователя
@@ -74,7 +74,7 @@
                 </div>
             </li>
             <li>
-                <div sec:authorize="hasRole('ADMIN')">
+                <div sec:authorize="hasRole('ROLE_ADMIN')">
                     <a class="nav-link"
                        th:href="@{/reservationFormADM.html}">
                         Добавить бронирование
@@ -88,9 +88,24 @@
                     Брони
                 </a>
             </li>
+            <li>
+                <div sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="nav-link"
+                       th:href="@{/addWorker}">
+                        Добавить работника
+                    </a>
+                </div>
+            </li>
+            <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                <a class="nav-link"
+                   th:classappend="${pageName eq 'workerList'}?'active'"
+                   th:href="@{/workerList.html(all)}">
+                    Работники
+                </a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link"
-                   sec:authorize="!hasRole('ADMIN')"
+                   sec:authorize="!hasRole('ROLE_ADMIN')"
                    th:classappend="${pageName eq 'about'}?'active'"
                    th:href="@{/about}">
                     О нас
@@ -98,7 +113,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link"
-                   sec:authorize="!hasRole('ADMIN')"
+                   sec:authorize="!hasRole('ROLE_ADMIN')"
                    th:classappend="${pageName eq 'contact'}?'active'"
                    th:href="@{/contact}">
                     Контакты
@@ -118,7 +133,7 @@
                 </a>
             </li>
             <li>
-                <div sec:authorize="!hasRole('ADMIN')" style="margin-right: 20px;">
+                <div sec:authorize="!hasRole('ROLE_ADMIN')" style="margin-right: 20px;">
                     <a class="nav-link book-btn" th:href="@{/reservationFormUSR.html}">
                         Забронировать номер
                     </a>

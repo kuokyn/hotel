@@ -59,14 +59,13 @@
                     </div>
                     <div class="room-info">
                         <div>
-                            <span class="card-title" th:text="${room.roomType.roomTypeName}"></span>
+                            <span class="card-title" th:text="${room.roomType.id}"></span>
                             <p>
-                                <span class="card-text price" th:text="${room.price} + ' $ / сутки'"></span><br>
+                                <span class="card-text price" th:text="${room.roomType.price} + ' $ / сутки'"></span><br>
                                 <span class="card-text"
-                                      th:text="${room.singleBeds} + ' односпальных кроватей'"></span><br>
+                                      th:text="${room.roomType.single_beds} + ' односпальных кроватей'"></span><br>
                                 <span class="card-text"
-                                      th:text="${room.doubleBeds} + ' двуспальных кроватей'"></span><br>
-                                <span class="card-text" th:text="${room.floor} + ' этаж'"></span><br>
+                                      th:text="${room.roomType.double_beds} + ' двуспальных кроватей'"></span><br>
                             </p>
                         </div>
                     </div>

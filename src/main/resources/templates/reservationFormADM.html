@@ -38,12 +38,12 @@
 <body>
 <div th:replace="shared/header :: header('reservationFormADM')"/>
 <div class="container">
-    <form th:method="POST" th:object="${roomReservation}" th:action="@{/reservationFormADM.html}">
+    <form th:method="POST" th:object="${booking}" th:action="@{/reservationFormADM.html}">
         <fieldset>
             <div class="form-group">
-                <input id="user.login" type="text" th:field="*{user.login}"
+                <input id="user.id" type="text" th:field="*{user.id}"
                        placeholder="Логин"
-                       class="form-control" th:classappend="${#fields.hasErrors('user.login')}?'is-invalid'"
+                       class="form-control" th:classappend="${#fields.hasErrors('user.id')}?'is-invalid'"
                        required="true"/>
                 <div class="error text-danger" th:if="${#fields.hasErrors('numberOfPeople')}">
                     <p th:each="err : ${#fields.errors('numberOfPeople')}" th:text="${err}"></p>
@@ -51,21 +51,21 @@
             </div>
             <div class="form-group">
                 <input id="reservationStartDate" type="date" th:field="*{reservationStartDate}"
-                       class="form-control"
-                       th:classappend="${#fields.hasErrors('reservationStartDate')}?'is-invalid'"
-                       required="true"/>
-                <div class="error text-danger" th:if="${#fields.hasErrors('reservationStartDate')}">
+                       class="form-control" required="true"/>
+<!--                       th:classappend="${#fields.hasErrors('reservationStartDate')}?'is-invalid'"-->
+
+                <!--<div class="error text-danger" th:if="${#fields.hasErrors('reservationStartDate')}">
                     <p th:each="err : ${#fields.errors('reservationStartDate')}" th:text="${err}"></p>
-                </div>
+                </div>-->
             </div>
             <div class="form-group">
                 <input id="reservationEndDate" type="date" th:field="*{reservationEndDate}"
-                       class="form-control"
-                       th:classappend="${#fields.hasErrors('reservationEndDate')}?'is-invalid'"
-                       required="true"/>
-                <div class="error text-danger" th:if="${#fields.hasErrors('reservationEndDate')}">
+                       class="form-control" required="true"/>
+<!--                       th:classappend="${#fields.hasErrors('reservationEndDate')}?'is-invalid'"-->
+<!--                       required="true"/>-->
+                <!--<div class="error text-danger" th:if="${#fields.hasErrors('reservationEndDate')}">
                     <p th:each="err : ${#fields.errors('reservationEndDate')}" th:text="${err}"></p>
-                </div>
+                </div>-->
             </div>
             <div class="form-group">
                 <input id="numberOfPeople" type="text" th:field="*{numberOfPeople}"

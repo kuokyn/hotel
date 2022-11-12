@@ -1,8 +1,8 @@
 package com.kuokyn.hotel.service;
 
+import com.kuokyn.hotel.entity.Booking;
 import com.kuokyn.hotel.filter.RoomReservationFilter;
 import com.kuokyn.hotel.entity.Room;
-import com.kuokyn.hotel.entity.RoomReservation;
 import com.kuokyn.hotel.entity.RoomType;
 import com.kuokyn.hotel.exception.RoomReservationNotFoundException;
 import com.kuokyn.hotel.repository.RoomRepository;
@@ -20,14 +20,18 @@ import java.util.Optional;
 @Service
 public class RoomReservationServiceImpl implements RoomReservationService {
 
-    @Autowired
-    private RoomTypeRepository roomTypeRepository;
+    private final RoomTypeRepository roomTypeRepository;
+
+    private final RoomRepository roomRepository;
+
+    private final RoomReservationRepository roomReservationRepository;
 
     @Autowired
-    private RoomRepository roomRepository;
-
-    @Autowired
-    private RoomReservationRepository roomReservationRepository;
+    public RoomReservationServiceImpl(RoomTypeRepository roomTypeRepository, RoomRepository roomRepository, RoomReservationRepository roomReservationRepository) {
+        this.roomTypeRepository = roomTypeRepository;
+        this.roomRepository = roomRepository;
+        this.roomReservationRepository = roomReservationRepository;
+    }
 
 
     @Override
@@ -41,43 +45,40 @@ public class RoomReservationServiceImpl implements RoomReservationService {
     }
 
     @Override
-    public Page<RoomReservation> getAllRoomReservations(RoomReservationFilter search, Pageable pageable) {
+    public Page<Booking> getAllRoomReservations(RoomReservationFilter search, Pageable pageable) {
 
-        Page page;
+        Page<Booking> page;
         if (search.isEmpty()) {
             page = roomReservationRepository.findAll(pageable);
         } else {
-
             page = roomReservationRepository.findAllRoomReservationsUsingFilter(search.getPhraseLIKE(), pageable);
         }
         return page;
     }
 
     @Override
-    public Page<RoomReservation> getUserRoomReservations(RoomReservationFilter search, Pageable pageable) {
-        Page page;
+    public Page<Booking> getUserRoomReservations(RoomReservationFilter search, Pageable pageable) {
+        Page<Booking> page;
         if (search.isEmpty()) {
             page = roomReservationRepository.findAll(pageable);
         } else {
             page = roomReservationRepository.findUserRoomReservations(search.getPhraseLIKE(), pageable);
         }
-
         return page;
     }
 
     @Transactional
     @Override
-    public RoomReservation getRoomReservation(Long id) {
-        Optional<RoomReservation> optionalRoomReservation = roomReservationRepository.findById(id);
-        RoomReservation roomReservation = optionalRoomReservation.orElseThrow(() -> new RoomReservationNotFoundException(id));
-        return roomReservation;
+    public Booking getRoomReservation(Long id) {
+        Optional<Booking> optionalRoomReservation = roomReservationRepository.findById(id);
+        return optionalRoomReservation.orElseThrow(() -> new RoomReservationNotFoundException(id));
 
 
     }
 
     @Override
     public void deleteRoomReservation(Long id) {
-        if (roomReservationRepository.existsById(id) == true) {
+        if (roomReservationRepository.existsById(id)) {
             roomReservationRepository.deleteById(id);
         } else {
             throw new RoomReservationNotFoundException(id);
@@ -86,7 +87,7 @@ public class RoomReservationServiceImpl implements RoomReservationService {
     }
 
     @Override
-    public void saveRoomReservation(RoomReservation roomReservation) {
+    public void saveRoomReservation(Booking booking) {
 
        /* List<RoomReservation> found = roomReservationRepository.findRoomReservationById(roomReservation.getRoom().getId());
 
@@ -96,7 +97,11 @@ public class RoomReservationServiceImpl implements RoomReservationService {
             }
 
         }*/
-        roomReservationRepository.save(roomReservation);
+        roomReservationRepository.save(booking);
+    }
+
+    public List<Booking> getRoomReservationsByUserId(Long id) {
+        return roomReservationRepository.findRoomReservationByUserId(id);
     }
 
 }

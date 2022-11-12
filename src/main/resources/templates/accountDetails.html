@@ -53,21 +53,24 @@
     <h1>Ваши данные</h1>
     <div class="data">
         <div class="data-item">
-            Логин: <b th:text="${user.login}"></b><br/>
+            ID: <b th:text="${user.id}"></b><br/>
         </div>
         <div class="data-item">
-            Имя: <b th:text="${user.firstName}"></b><br/>
+            Имя: <b th:text="${user.name}"></b><br/>
         </div>
         <div class="data-item">
-            Фамилия: <b th:text="${user.lastName}"></b><br/>
+            Фамилия: <b th:text="${user.surname}"></b><br/>
         </div>
         <div class="data-item">
             Почта: <b th:text="${user.email}"></b><br/>
         </div>
         <div class="data-item">
-            Номер телефона: <b th:text="${user.phoneNumber}"></b><br/>
+            Номер телефона: <b th:text="${user.phone}"></b><br/>
         </div>
     </div>
+    <!--<div class="buttons" sec:authorize="hasRole('USER')">
+        <a class="acc-btn" th:href="@{/editUserUSR.html(id=${user.id})}">Редактировать</a>
+    </div>-->
     <div class="buttons">
         <a class="acc-btn"
            th:classappend="${pageName eq 'login'}?'active'" href="/logout">

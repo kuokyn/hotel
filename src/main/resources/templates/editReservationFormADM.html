@@ -14,37 +14,37 @@
 
 <div th:replace="shared/header :: header('editReservationFormADM')"/>
 <div class="container text-center">
-    <!--<form th:method="POST" th:object="${roomReservation}" th:action="@{/editReservationFormADM.html}">
+    <!--<form th:method="POST" th:object="${booking}" th:action="@{/editReservationFormADM.html}">
         <fieldset>
-            <p>Имя: <span style="font-weight: bold;"> [[${roomReservation.user.login}]]
+            <p>Имя: <span style="font-weight: bold;"> [[${booking.user.login}]]
             </span> /
-                <span> [[${roomReservation.user.firstName}]]</span><span> [[${roomReservation.user.lastName}]]
+                <span> [[${booking.user.firstName}]]</span><span> [[${booking.user.lastName}]]
                 </span>
             </p>
             <p>Начало бронирования: <span style="font-weight: bold;"
-                                          th:text="${#dates.format(roomReservation.reservationStartDate, 'dd-MM-yyyy')}"></span><br>
+                                          th:text="${#dates.format(booking.reservationStartDate, 'dd-MM-yyyy')}"></span><br>
                 Конец бронирования: <span style="font-weight: bold;"
-                                          th:text="${#dates.format(roomReservation.reservationEndDate, 'dd-MM-yyyy')}"></span><br>
+                                          th:text="${#dates.format(booking.reservationEndDate, 'dd-MM-yyyy')}"></span><br>
             </p>
-            <p>Номер комнаты : <span style="font-weight: bold;">[[${roomReservation.room.roomNumber}]]</span><br>
-                Число людей: <span style="font-weight: bold;"> [[${roomReservation.numberOfPeople}]]</span></p>
+            <p>Номер комнаты : <span style="font-weight: bold;">[[${booking.room.roomNumber}]]</span><br>
+                Число людей: <span style="font-weight: bold;"> [[${booking.numberOfPeople}]]</span></p>
             <hr>
             <input type="submit" class="btn btn-lg btn-primary btn-block" value="Сохранить изменения"/>
         </fieldset>
     </form>-->
     <fieldset>
-        <p>Имя: <span style="font-weight: bold;"> [[${roomReservation.user.login}]]
+        <p>Имя: <span style="font-weight: bold;"> [[${booking.user.phone}]]
             </span> /
-            <span> [[${roomReservation.user.firstName}]]</span><span> [[${roomReservation.user.lastName}]]
+            <span> [[${booking.user.name}]]</span><span> [[${booking.user.surname}]]
                 </span>
         </p>
         <p>Начало бронирования: <span style="font-weight: bold;"
-                                      th:text="${#dates.format(roomReservation.reservationStartDate, 'dd-MM-yyyy')}"></span><br>
+                                      th:text="${#dates.format(booking.reservationStartDate, 'dd-MM-yyyy')}"></span><br>
             Конец бронирования: <span style="font-weight: bold;"
-                                      th:text="${#dates.format(roomReservation.reservationEndDate, 'dd-MM-yyyy')}"></span><br>
+                                      th:text="${#dates.format(booking.reservationEndDate, 'dd-MM-yyyy')}"></span><br>
         </p>
-        <p>Номер комнаты : <span style="font-weight: bold;">[[${roomReservation.room.roomNumber}]]</span><br>
-            Число людей: <span style="font-weight: bold;"> [[${roomReservation.numberOfPeople}]]</span></p>
+        <p>Номер комнаты : <span style="font-weight: bold;">[[${booking.room.id}]]</span><br>
+            Число людей: <span style="font-weight: bold;"> [[${booking.room.people}]]</span></p>
         <hr>
     </fieldset>
     <br>

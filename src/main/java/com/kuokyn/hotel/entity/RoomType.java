@@ -8,30 +8,25 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "room_types")
+@Table(name = "room_type")
 @Getter
 @Setter
 public class RoomType implements Serializable {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "title", length=20, nullable = false)
+    private String id;
 
-    @Column(name="name",nullable = false)
-    private String roomTypeName;
+    @Column(name = "single_beds", nullable = false)
+    private int single_beds;
 
-    @Column(name = "min_price", nullable = false)
-    private int minPrice;
+    @Column(name = "double_beds", nullable = false)
+    private int double_beds;
 
-    @Column(name = "max_price", nullable = false)
-    private int maxPrice;
-
+    @Column(name = "price", nullable = false)
+    private double price;
 
     public RoomType() {
-
-    }
-
-    public RoomType(String roomTypeName) {
-        this.roomTypeName = roomTypeName;
     }
 
     @Override

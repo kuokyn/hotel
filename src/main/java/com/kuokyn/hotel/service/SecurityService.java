@@ -14,11 +14,15 @@ public class SecurityService {
 
     private static final Logger log = LoggerFactory.getLogger(SecurityService.class);
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
+
+    private final UserDetailsServiceImpl userDetailsServiceImpl;
 
     @Autowired
-    private UserDetailsServiceImpl userDetailsServiceImpl;
+    public SecurityService(AuthenticationManager authenticationManager, UserDetailsServiceImpl userDetailsServiceImpl) {
+        this.authenticationManager = authenticationManager;
+        this.userDetailsServiceImpl = userDetailsServiceImpl;
+    }
 
     public String findLoggedInLogin(){
         Object userDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
@@ -28,16 +32,5 @@ public class SecurityService {
         return null;
     }
 
-    public void autoLogin(String login, String password) {
-        UserDetails userDetails = userDetailsServiceImpl.loadUserByUsername(login);
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails,password,userDetails.getAuthorities());
-
-        authenticationManager.authenticate(usernamePasswordAuthenticationToken);
-
-        if (usernamePasswordAuthenticationToken.isAuthenticated()) {
-            SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-            log.info("Automatyczne logowanie %s zakończone sukcesem", login);
-        }
-    }
 
 }

@@ -160,15 +160,15 @@
     </style>
 </head>
 <body>
-<div th:replace="shared/header :: header('addUser')"/>
+<div th:replace="shared/header :: header('addWorker')"/>
 
 <div class="container text-center">
     <section class="task6">
         <div class="form-wrap">
             <div class="h1-form">
-                <h1 class="form">Регистрация пользователя</h1>
+                <h1 class="form">Регистрация работника</h1>
             </div>
-            <form id="form2" class="form-signin" method="POST" th:object="${userForm}">
+            <form id="form2" class="form-signin" method="POST" th:object="${workerForm}">
                 <div class="field email">
                     <div class="input-field">
                         <label for="phone">Номер телефона</label>
@@ -197,21 +197,14 @@
                                class="form-control" placeholder="example@example.com" required="true" autofocus="true"/>
                     </div>
                 </div>
-               <!-- <div class="field">
+                <div class="field">
                     <div class="input-field">
-                        <label for="phoneNumber">Телефон</label>
-                        <input id="phoneNumber" type="text" th:field="*{phoneNumber}"
-                               class="form-control" placeholder="Номер телефона" required="true" autofocus="true"/>
-                    </div>
-                </div>-->
-                <div class="field password">
-                    <div class="input-field">
-                        <label for="password">Пароль</label>
-                        <input id="password" type="password" th:field="*{password}"
-                               class="form-control" placeholder="Пароль" required="true" autofocus="true"/>
+                        <label for="job">Пароль</label>
+                        <input id="job" type="text" th:field="*{job}"
+                               class="form-control" placeholder="Должность" required="true" autofocus="true"/>
                     </div>
                 </div>
-                <input id="login" class="field" type="submit" value="Зарегистрировать">
+                <input id="login" class="field" type="submit" value="Добавить">
             </form>
             <a class="cancel" th:href="@{/index}">Отмена</a>
         </div>

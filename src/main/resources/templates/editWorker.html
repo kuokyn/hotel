@@ -108,19 +108,19 @@
 </head>
 <body>
 
-<div th:replace="shared/header :: header('editUser')"/>
+<div th:replace="shared/header :: header('editWorker')"/>
 <div class="container text-center">
     <section class="task6">
         <div class="form-wrap">
             <div class="h1-form">
-                <h1 class="form">Редактировать данные пользователя</h1>
+                <h1 class="form">Редактировать данные работника</h1>
             </div>
-            <form th:method="POST" th:object="${userForm}">
+            <form th:method="POST" th:object="${workerForm}">
                 <div>
                     <div class="field">
                         <div class="input-field">
                             Номер телефона
-                            <span style="font-weight: bold;"> [[${userForm.phone}]]</span>
+                            <span style="font-weight: bold;"> [[${workerForm.phone}]]</span>
                         </div>
                     </div>
                     <div class="field">
@@ -144,13 +144,13 @@
                                    class="form-control" placeholder="" required="true" autofocus="true"/>
                         </div>
                     </div>
-                    <!--<div class="field">
+                    <div class="field">
                         <div class="input-field">
-                            Телефон
-                            <input type="text" th:field="*{phone}"
+                            Должность
+                            <input type="text" th:field="*{job}"
                                    class="form-control" placeholder="" required="true" autofocus="true"/>
                         </div>
-                    </div>-->
+                    </div>
                     <input id="submit" type="submit" class="field btn btn-lg btn-primary btn-block"
                            value="Сохранить"/>
                 </div>
