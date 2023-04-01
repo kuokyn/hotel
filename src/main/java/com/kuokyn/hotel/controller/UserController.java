@@ -2,6 +2,7 @@ package com.kuokyn.hotel.controller;
 
 import com.kuokyn.hotel.entity.User;
 import com.kuokyn.hotel.filter.UserFilter;
+import com.kuokyn.hotel.repository.UserRepository;
 import com.kuokyn.hotel.service.SecurityService;
 import com.kuokyn.hotel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,19 +20,21 @@ import java.security.Principal;
 import java.util.Optional;
 
 @Controller
-@RequestMapping
-@SessionAttributes("userForm")
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
     private final PasswordEncoder passwordEncoder;
     private final UserService userService;
+
+    private final UserRepository userRepository;
     private final SecurityService securityService;
 
     @Autowired
-    public UserController(UserService userService, SecurityService securityService, PasswordEncoder passwordEncoder) {
+    public UserController(UserService userService, SecurityService securityService, PasswordEncoder passwordEncoder, UserRepository userRepository) {
         this.userService = userService;
         this.securityService = securityService;
         this.passwordEncoder = passwordEncoder;
+        this.userRepository = userRepository;
     }
 
     /* -----ADMIN------*/
@@ -129,21 +132,20 @@ public class UserController {
         userService.save(userForm);
         return "index.html";
     }
-
+/*
     @GetMapping("/login")
     public String login() {
         return "login";
-    }
+    }*/
 
-    @PostMapping("/login")
-    public String login(Model model, String error, String logout) {
-        if (error != null)
-            model.addAttribute("error", "Your username and password is invalid.");
-
-        if (logout != null)
-            model.addAttribute("message", "You have been logged out successfully.");
-        return "index.html";
-    }
+   /* @PostMapping("/login")
+    public User login(@RequestBody User user) {
+        if(userRepository.findByPhone(user.getPhone()) == null) return null;
+        else if(!userRepository.findByPhone(user.getPhone()).getPassword().equals(user.getPassword()))
+            return null;
+        else
+            return userRepository.findByPhone(user.getPhone());
+    }*/
 
     @GetMapping({"/", "/index"})
     public String index(Model model) {
